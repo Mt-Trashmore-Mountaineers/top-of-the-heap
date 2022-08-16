@@ -6,7 +6,7 @@ import { withAuth0 } from '@auth0/auth0-react';
 
 class App extends React.Component {
   render() {
-    const { isAuthenticated, loginWithRedirect, logout } = this.props.auth0;
+    const { user, isAuthenticated, loginWithRedirect, logout } = this.props.auth0;
     return (
       <div className="App">
         <nav className="navbar">
@@ -24,6 +24,7 @@ class App extends React.Component {
                 }}>Log out</button> :
                 <button className="primary" onClick={loginWithRedirect}>Login</button>
             }
+            <img className="profile-picture" alt="profile" src={isAuthenticated ? user.picture : "https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg"}></img>
           </div>
         </nav>
       </div>

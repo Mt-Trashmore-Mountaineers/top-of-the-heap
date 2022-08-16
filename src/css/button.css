@@ -1,7 +1,7 @@
 button {
     margin-left: 10px;
     margin-right: 10px;
-    transition: all 20ms ease-in-out;
+    transition: all 50ms ease-in-out;
     outline: none;
     border: none;
     border-radius: 5px;
