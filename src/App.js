@@ -5,6 +5,7 @@ import './css/button.css';
 import { withAuth0 } from '@auth0/auth0-react';
 import QuizList from './QuizList';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import CreateQuiz from './CreateQuiz';
 
 class App extends React.Component {
   render() {
@@ -28,6 +29,7 @@ class App extends React.Component {
             }
           </div>
         </nav>
+        <CreateQuiz/>
         <Routes>
           <Route path="user" element={<QuizList />} ></Route>
         </Routes>

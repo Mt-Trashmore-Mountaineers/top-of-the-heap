@@ -27,7 +27,7 @@ class CreateQuiz extends React.Component {
 
     render() {
         if (this.state.questions.length === 0) {
-            let questions= [];
+            let questions = [];
             questions.push({
                 index: "0",
                 question: '',
@@ -41,12 +41,12 @@ class CreateQuiz extends React.Component {
             })
         }
         return (
-            <Card>
-                <Form onSubmit={this.prevent}>
-                    <Form.Group>
-                        <Form.Control type="text" placeholder="Enter the quiz name">
-                        </Form.Control>
-                    </Form.Group>
+            <Form onSubmit={this.prevent}>
+                <Form.Group>
+                    <Form.Control type="text" placeholder="Enter the quiz name">
+                    </Form.Control>
+                </Form.Group>
+                <Card>
                     {this.state.questions.map((val, index) => {
                         return (
                             <Question
@@ -59,8 +59,9 @@ class CreateQuiz extends React.Component {
                             />
                         )
                     })}
-                </Form>
-            </Card>
+                </Card>
+                
+            </Form>
         )
     }
 }
