@@ -2,6 +2,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import React from 'react';
 import axios from 'axios';
 import { ListGroup } from "react-bootstrap";
+import QuizSummary from "./QuizSummary";
 
 class QuizList extends React.Component {
   constructor(props) {
