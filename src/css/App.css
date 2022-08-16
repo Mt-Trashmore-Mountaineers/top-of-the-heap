@@ -1,6 +1,5 @@
 * {
     --blue: #003cee;
-    color: white;
 }
 
 .nav-element {
@@ -11,6 +10,7 @@
 .navbar {
     width: 100vw;
     background-color: var(--blue);
+    color: white;
     padding: 10px;
     display: flex;
     flex-direction: row;
@@ -29,4 +29,9 @@
 .button-container {
     display: flex;
     flex-direction: row;
+}
+
+.card {
+    border: 2px solid black;
+    margin: 5px;
 }
