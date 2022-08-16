@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
-import './App.css';
+import './css/App.css';
 import './css/button.css';
 import { withAuth0 } from '@auth0/auth0-react';
 
