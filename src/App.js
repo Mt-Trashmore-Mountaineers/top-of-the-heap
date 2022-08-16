@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import './App.css';
+import './css/button.css';
 import { withAuth0 } from '@auth0/auth0-react';
 
 class App extends React.Component {
@@ -8,7 +9,12 @@ class App extends React.Component {
     const { user, isAuthenticated, loginWithRedirect } = this.props.auth0;
     return (
       <div className="App">
-        <button className='primary'>Login</button>
+        <button className='primary' onClick={loginWithRedirect}>Login</button>
+        {
+          isAuthenticated ?
+          <p>Logged in</p> :
+          <p>Logged out</p>
+        }
       </div>
     )
   }
