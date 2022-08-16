@@ -3,14 +3,20 @@ import React from 'react';
 import axios from 'axios';
 import { ListGroup } from "react-bootstrap";
 import QuizSummary from "./QuizSummary";
+import ViewQuiz from "./ViewQuiz";
 
 class QuizList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       quizzes: [],
-      quizIndex: 0
+      quizIndex: 0,
+      showModal: false
     }
+  }
+
+  toggleModal = () => {
+    this.setState({showModal: !this.state.showModal})
   }
 
   getQuizzes = async () => {
@@ -56,14 +62,15 @@ class QuizList extends React.Component {
               <QuizSummary
                 quiz={quiz}
                 key={index}
-                onClick={this.handleShowModal}
+                onClick={this.toggleModal}
               />)
           }
         </ListGroup>
         <ViewQuiz
           quiz={this.state.quizzes[this.state.quizIndex]}
           deleteQuiz={this.deleteQuiz}
-
+          showModal={this.state.showModal}
+          toggleModal={this.toggleModal}
         />
       </>
     )

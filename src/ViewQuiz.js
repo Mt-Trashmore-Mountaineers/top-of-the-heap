@@ -8,7 +8,7 @@ class ViewQuiz extends React.Component {
   }
   render() {
     return(
-      <Modal show={this.props.showModal} onHide={this.props.hideModal} >
+      <Modal show={this.props.showModal} onHide={this.props.toggleModal} >
         <Modal.Header closeButton>
           <Modal.Title>{this.props.quiz.title}</Modal.Title>
         </Modal.Header>
