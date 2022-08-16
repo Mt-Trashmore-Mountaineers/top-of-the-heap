@@ -7,42 +7,58 @@ class CreateQuiz extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            questions: [
-                <Question
-                    index = "0"
-                    question={''}
-                    correct={''}
-                    incorrect={[
-                            <Form.Group>
-                                <Form.Label>
-                                    Incorrect
-                                </Form.Label>
-                                <Form.Control type="text" placeholder="Incorrect answers">
-                                </Form.Control>
-                            </Form.Group>
-                    ]}
-                    updateQuestionsState
-                />],
+            questions: [],
         };
     }
 
+    prevent = (event) => {
+        event.preventDefault();
+    }
+
     updateQuestionsState = (question) => {
-        let questions = this.questions;
+        let questions = this.state.questions;
         questions[parseInt(question.index)] = question;
         this.setState({
             questions: questions
         })
+        console.log("here");
+
     }
 
     render() {
+        if (this.state.questions.length === 0) {
+            let questions= [];
+            questions.push({
+                index: "0",
+                question: '',
+                correct: '',
+                incorrect:
+                    [''],
+                updateQuestionsState: this.updateQuestionsState
+            })
+            this.setState({
+                questions: questions
+            })
+        }
         return (
             <Card>
-                <Form>
+                <Form onSubmit={this.prevent}>
                     <Form.Group>
                         <Form.Control type="text" placeholder="Enter the quiz name">
                         </Form.Control>
                     </Form.Group>
-                    {this.state.questions}
+                    {this.state.questions.map((val, index) => {
+                        return (
+                            <Question
+                                key={index}
+                                index={index}
+                                question={val.question}
+                                correct={val.correct}
+                                incorrect={val.incorrect}
+                                updateQuestionsState={this.updateQuestionsState}
+                            />
+                        )
+                    })}
                 </Form>
             </Card>
         )

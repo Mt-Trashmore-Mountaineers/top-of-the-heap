@@ -6,30 +6,20 @@ import "./css/button.css"
 class Question extends React.Component {
     constructor(props) {
         super(props);
-        let incorrect;
-        if(this.props.incorrect === []){
-            incorrect = 
-            [
-                <Form.Group>
-                    <Form.Label>
-                        Incorrect
-                    </Form.Label>
-                    <Form.Control type="text" placeholder="Incorrect answer">
-                    </Form.Control>
-                </Form.Group>
-            ]
-        } else {
-            incorrect = this.props.incorrect
-        }
         this.state = {
             question: this.props.question,
             correct: this.props.correct,
-            incorrect: incorrect,
+            incorrect: this.props.incorrect,
+            index: this.props.index,
+            empty: ""
         }
 
 
     }
 
+    updateSuper = () => {
+        this.props.updateQuestionsState(this.state);
+    }
 
     handleQuestionChange = (event) => {
         this.setState({
@@ -45,23 +35,24 @@ class Question extends React.Component {
 
     addIncorrect = () => {
         let incorrect = this.state.incorrect;
-        incorrect.push(
-            <Form.Group>
-                <Form.Label>
-                    Incorrect
-                </Form.Label>
-                <Form.Control type="text" placeholder="Incorrect answers">
-                </Form.Control>
-            </Form.Group>
-        )
+        incorrect.push("")
         this.setState({
             incorrect: incorrect
         })
+
+        this.updateSuper();
     }
 
     render() {
+        let incorrectResponses = this.state.incorrect.map((val, index) => {
+            return (<Form.Group key={index}>
+                <Form.Label>Incorrect</Form.Label>
+                <Form.Control type="text" defaultValue={val}></Form.Control>
+            </Form.Group>)
+        })
+
         return (
-            <>
+            <div>
                 <Form.Group>
                     <Form.Label>
                         Question
@@ -100,9 +91,9 @@ class Question extends React.Component {
                             </Form.Control>
                     }
                 </Form.Group>
-                {this.state.incorrect}
+                {incorrectResponses}
                 <button  className='primary' id="addIncorrect" onClick={this.addIncorrect}>Add Incorrect</button>
-            </>
+            </div>
         )
     }
 }

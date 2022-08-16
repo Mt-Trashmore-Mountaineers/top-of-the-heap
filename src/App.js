@@ -3,6 +3,8 @@ import React from 'react';
 import './css/App.css';
 import './css/button.css';
 import { withAuth0 } from '@auth0/auth0-react';
+import './CreateQuiz';
+import CreateQuiz from './CreateQuiz';
 
 class App extends React.Component {
   render() {
@@ -26,6 +28,7 @@ class App extends React.Component {
             }
           </div>
         </nav>
+        <CreateQuiz/>
       </div>
     )
   }
