@@ -8,10 +8,10 @@ class App extends React.Component {
     const { user, isAuthenticated, loginWithRedirect } = this.props.auth0;
     return (
       <div className="App">
-        <button>Login</button>
+        <button className='primary'>Login</button>
       </div>
     )
   }
 }
 
-export default App;
+export default withAuth0(App);
