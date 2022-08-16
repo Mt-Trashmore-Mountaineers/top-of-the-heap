@@ -3,14 +3,14 @@ import React from 'react';
 import './css/App.css';
 import './css/button.css';
 import { withAuth0 } from '@auth0/auth0-react';
-import './CreateQuiz';
-import CreateQuiz from './CreateQuiz';
+import QuizList from './QuizList';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 class App extends React.Component {
   render() {
     const { isAuthenticated, loginWithRedirect, logout } = this.props.auth0;
     return (
-      <div className="App">
+      <Router className="App">
         <nav className="navbar">
           <h2>Quiz App</h2>
           <input className="searchbar"></input>
@@ -28,8 +28,10 @@ class App extends React.Component {
             }
           </div>
         </nav>
-        <CreateQuiz/>
-      </div>
+        <Routes>
+          <Route path="user" element={<QuizList />} ></Route>
+        </Routes>
+      </Router>
     )
   }
 }
