@@ -7,6 +7,7 @@ import { withAuth0 } from '@auth0/auth0-react';
 class App extends React.Component {
   render() {
     const { user, isAuthenticated, loginWithRedirect } = this.props.auth0;
+    console.log(user);
     return (
       <div className="App">
         <button className='primary' onClick={loginWithRedirect}>Login</button>
