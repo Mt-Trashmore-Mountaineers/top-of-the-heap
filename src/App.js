@@ -6,16 +6,26 @@ import { withAuth0 } from '@auth0/auth0-react';
 
 class App extends React.Component {
   render() {
-    const { user, isAuthenticated, loginWithRedirect } = this.props.auth0;
-    console.log(user);
+    const { user, isAuthenticated, loginWithRedirect, logout } = this.props.auth0;
     return (
       <div className="App">
-        <button className='primary' onClick={loginWithRedirect}>Login</button>
-        {
-          isAuthenticated ?
-          <p>Logged in</p> :
-          <p>Logged out</p>
-        }
+        <nav className="navbar">
+          <h2>Quiz App</h2>
+          <input className="searchbar"></input>
+          <div className="button-container">
+            <button className="primary">Create</button>
+            <button className="primary">Browse</button>
+            <button className="primary">Play</button>
+            {
+              // Log in/out button
+              isAuthenticated ?
+                <button className="default" onClick={() => {
+                  logout({ returnTo: window.location.origin });
+                }}>Log out</button> :
+                <button className="primary" onClick={loginWithRedirect}>Login</button>
+            }
+          </div>
+        </nav>
       </div>
     )
   }
