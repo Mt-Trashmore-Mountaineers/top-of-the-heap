@@ -9,14 +9,72 @@ class QuizList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      quizzes: [],
+      quizzes: [{
+        title: 'Test',
+        plays: 420,
+        questions: [{
+          "category": "History",
+          "type": "multiple",
+          "difficulty": "medium",
+          "question": "The seed drill was invented by which British inventor?",
+          "correct_answer": "Jethro Tull",
+          "incorrect_answers": [
+            "Charles Babbage",
+            "Isaac Newton",
+            "J.J Thomson"
+          ]
+        },
+        {
+          "category": "History",
+          "type": "multiple",
+          "difficulty": "medium",
+          "question": "All of the following are names of the Seven Warring States EXCEPT:",
+          "correct_answer": "Zhai (翟)",
+          "incorrect_answers": [
+            "Zhao (趙)",
+            "Qin (秦)",
+            "Qi (齊)"
+          ]
+        }]
+      },
+      {
+        title: '2Test',
+        plays: 420,
+        questions: [{
+          "category": "History",
+          "type": "multiple",
+          "difficulty": "medium",
+          "question": "2The seed drill was invented by which British inventor?",
+          "correct_answer": "Jethro Tull",
+          "incorrect_answers": [
+            "Charles Babbage",
+            "Isaac Newton",
+            "J.J Thomson"
+          ]
+        },
+        {
+          "category": "History",
+          "type": "multiple",
+          "difficulty": "medium",
+          "question": "2All of the following are names of the Seven Warring States EXCEPT:",
+          "correct_answer": "Zhai (翟)",
+          "incorrect_answers": [
+            "Zhao (趙)",
+            "Qin (秦)",
+            "Qi (齊)"
+          ]
+        }]
+      }],
       quizIndex: 0,
       showModal: false
     }
   }
 
-  toggleModal = () => {
-    this.setState({showModal: !this.state.showModal})
+  toggleModal = (index = this.state.quizIndex) => {
+    this.setState({
+      quizIndex: index,
+      showModal: !this.state.showModal
+    })
   }
 
   getQuizzes = async () => {
@@ -36,6 +94,7 @@ class QuizList extends React.Component {
   }
   deleteQuiz = async (ID) => {
     try {
+      this.toggleModal();
       const config = {
         method: 'delete',
         baseURL: process.env.REACT_APP_SERVER,
@@ -54,7 +113,8 @@ class QuizList extends React.Component {
 
   render() {
     return (
-      <>
+      <section>
+        <h2>User's Quizzes</h2>
         <ListGroup>
           {
             this.state.quizzes.length > 0 &&
@@ -62,7 +122,8 @@ class QuizList extends React.Component {
               <QuizSummary
                 quiz={quiz}
                 key={index}
-                onClick={this.toggleModal}
+                index={index}
+                toggleModal={this.toggleModal}
               />)
           }
         </ListGroup>
@@ -72,7 +133,7 @@ class QuizList extends React.Component {
           showModal={this.state.showModal}
           toggleModal={this.toggleModal}
         />
-      </>
+      </section>
     )
   }
 }
