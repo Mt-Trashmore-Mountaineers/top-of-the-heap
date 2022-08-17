@@ -90,7 +90,7 @@ class Question extends React.Component {
                                 <Col>
                                     <Form.Control
                                         type="text"
-                                        defaultValue={this.question}
+                                        defaultValue={this.state.question}
                                         onChange={this.handleQuestionChange}>
                                     </Form.Control>
                                 </Col>

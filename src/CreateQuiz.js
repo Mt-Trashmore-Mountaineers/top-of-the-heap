@@ -46,6 +46,22 @@ class CreateQuiz extends React.Component {
         });
     }
 
+    addTriviaQuestion = async () => {
+        let questions = this.state.questions;
+        let data = await axios.get("https://opentdb.com/api.php?amount=1&category=18&difficulty=medium&type=multiple");
+        let question = await data.data.results[0];
+        questions.push({
+            index: "0",
+            question: question.question,
+            correct: question.correct_answer,
+            incorrect: question.incorrect_answers,
+            updateQuestionsState: this.updateQuestionsState
+        })
+        this.setState({
+            questions: questions
+        });
+    }
+
     handleTitleChange = (event) => {
         this.setState({
             title: event.target.value
@@ -117,6 +133,7 @@ class CreateQuiz extends React.Component {
                         )
                     })}
                     <button className="primary" onClick={this.addQuestion}>Add Question</button>
+                    <button className="primary" onClick={this.addTriviaQuestion}>Get Trivia Question</button>
                     <button className="primary" onClick={this.postQuiz}>Submit Quiz</button>
                 </Form>
                 <Modal show={this.state.showModal} onHide={this.handleOnHide}>
