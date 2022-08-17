@@ -18,6 +18,7 @@
 }
 
 .searchbar {
+    color: white;
     padding: 5px;
     border: none;
     background-color: #4c9bc9b9;
@@ -34,4 +35,39 @@
 .card {
     border: 2px solid black;
     margin: 5px;
+}
+
+a.primary, Link.primary {
+    text-align: center;
+    transition: all 20ms ease-in-out;
+    min-width: 60px;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-decoration: none;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: royalblue;
+    box-shadow: 0px 4px 0px blue;
+}
+
+a.primary:active, Link.primary {
+    box-shadow: 0px 0px 0px blue;
+    translate: 0px 4px;
+}
+
+a.primary.grey {
+    background-color: darkgray;
+    color: black;
+    box-shadow: 0px 4px 0px darkslategray;
+}
+
+a.primary.grey:active {
+    box-shadow: 0px 0px 0px darkslategray;
+    translate: 0px 4px;
+}
+
+#profile-picture {
+    height: 40px;
+    border-radius: 50%;
 }
