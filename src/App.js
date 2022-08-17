@@ -3,10 +3,11 @@ import React from 'react';
 import './css/App.css';
 import './css/button.css';
 import { withAuth0 } from '@auth0/auth0-react';
-import QuizList from './QuizList.js';
-import About from './About.js';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import About from './About.js';
 import CreateQuiz from './CreateQuiz';
+import PlayQuiz from './PlayQuiz';
+import QuizList from './QuizList';
 
 class App extends React.Component {
   render() {
@@ -33,9 +34,10 @@ class App extends React.Component {
           </div>
         </nav>
         <Routes>
-          <Route path="user" element={<QuizList />} ></Route>
           <Route path="about" element={<About />} ></Route>
-          <Route path="create" element={<CreateQuiz quiz={''} questions={[]} email={user ? user.email: ''} title=''/>} ></Route>
+          <Route path="create" element={<CreateQuiz quiz={''} questions={[]} email={user ? user.email : ''} title='' />} ></Route>
+          <Route path="play" element={<PlayQuiz />} ></Route>
+          <Route path="user" element={<QuizList />} ></Route>
         </Routes>
       </Router>
     )
