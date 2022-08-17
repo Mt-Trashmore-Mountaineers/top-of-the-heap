@@ -13,42 +13,40 @@ class Question extends React.Component {
             correct: this.props.correct,
             incorrect: this.props.incorrect,
             index: this.props.index,
-            empty: ""
         }
-
-
-    }
-
-    updateSuper = () => {
-        this.props.updateQuestionsState(this.state);
     }
 
     handleQuestionChange = (event) => {
+        console.log(event.target.value);
         this.setState({
             question: event.target.value
-        });
-    }
+        }, () => this.props.updateQuestionsState(this.state));
+    };
 
-    handleCorrectChange = (event) => {
-        this.setState({
-            correct: event.target.value
-        });
-    }
+    handleCorrectChange = async (event) => {
+        let correct = this.state.correct;
+        correct = event.target.value;
+        await this.setState({
+            correct: correct
+        }, () => this.props.updateQuestionsState(this.state));
+
+    };
 
     addIncorrect = () => {
         let incorrect = this.state.incorrect;
         incorrect.push("")
         this.setState({
             incorrect: incorrect
-        })
-
-        this.updateSuper();
-    }
+        });
+    };
 
     handleIncorrectChange = (event,index) => {
         let incorrect = this.state.incorrect;
         incorrect[index] = event.target.value;
-    }
+        this.props.updateQuestionsState(this.state);
+    };
+
+    
 
     render() {
         if (this.state.incorrect.length === 0) {
@@ -64,7 +62,7 @@ class Question extends React.Component {
                             </Form.Label>
                         </Col>
                         <Col>
-                            <Form.Control type="text" onChange={event => this.handleIncorrectChange(event,index)} onFocusOut={this.updateSuper} defaultValue={val} />
+                            <Form.Control type="text" onChange={event => this.handleIncorrectChange(event, index)} defaultValue={val} />
                         </Col>
                     </Form.Group>
                 </Row>)
@@ -120,7 +118,7 @@ class Question extends React.Component {
                                     <Form.Control
                                         type="text"
                                         className="correct" defaultValue={this.state.correct}
-                                        onChange={this.handleCorrectChange} />
+                                        onChange={this.handleCorrectChange}/>
                                 </Col>
                         }
                     </Form.Group>
