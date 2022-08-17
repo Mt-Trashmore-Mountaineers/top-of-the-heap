@@ -33,8 +33,6 @@ class App extends React.Component {
         </nav>
         <Routes>
           <Route path="user" element={<QuizList />} ></Route>
-        </Routes>
-        <Routes>
           <Route path="about" element={<About />} ></Route>
         </Routes>
       </Router>
