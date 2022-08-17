@@ -27,7 +27,6 @@ class PlaySlide extends React.Component {
     let shuffledAnswers = array.map(i => this.props.question.incorrect_answers[i]);
     let insert = Math.floor(Math.random() * (array.length + 1))
     shuffledAnswers.splice(insert, 0, this.props.question.correct_answer);
-    console.log(shuffledAnswers);
     this.setState({
       shuffledAnswers: shuffledAnswers,
       correctIndex: insert
@@ -35,8 +34,11 @@ class PlaySlide extends React.Component {
   }
 
   scoreQuestion = (event) => {
-    console.log(event);
-    if (event.target.id !== this.state.correctIndex) this.setState({ incorrect: parseInt(event.target.id) });
+    if (parseInt(event.target.id) === this.state.correctIndex) {
+      this.props.updateScore(this.props.question.difficulty, this.props.question.category)
+    } else {
+      this.setState({ incorrect: parseInt(event.target.id) });
+    }
     this.setState({ correct: this.state.correctIndex });
   }
 
