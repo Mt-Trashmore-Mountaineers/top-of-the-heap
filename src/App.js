@@ -4,7 +4,7 @@ import './css/App.css';
 import './css/button.css';
 import { withAuth0 } from '@auth0/auth0-react';
 import QuizList from './QuizList';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import CreateQuiz from './CreateQuiz';
 
 class App extends React.Component {
@@ -16,7 +16,11 @@ class App extends React.Component {
           <h2>Quiz App</h2>
           <input className="searchbar"></input>
           <div className="button-container">
-            <button className="primary">Create</button>
+            <Link to="/Create">
+              <button className="primary">
+                Create
+              </button>
+            </Link>
             <button className="primary">Browse</button>
             <button className="primary">Play</button>
             {
@@ -29,9 +33,9 @@ class App extends React.Component {
             }
           </div>
         </nav>
-        <CreateQuiz/>
         <Routes>
           <Route path="user" element={<QuizList />} ></Route>
+          <Route path="Create" element={<CreateQuiz/>}></Route>
         </Routes>
       </Router>
     )

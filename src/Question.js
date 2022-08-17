@@ -1,6 +1,8 @@
 import React from "react";
+import { Container, Row, Col } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import "./css/button.css"
+import "./css/button.css";
+import "./css/CreateQuiz.css";
 
 
 class Question extends React.Component {
@@ -31,7 +33,7 @@ class Question extends React.Component {
         this.setState({
             correct: event.target.value
         });
-    } 
+    }
 
     addIncorrect = () => {
         let incorrect = this.state.incorrect;
@@ -43,57 +45,89 @@ class Question extends React.Component {
         this.updateSuper();
     }
 
+    handleIncorrectChange = (event,index) => {
+        let incorrect = this.state.incorrect;
+        incorrect[index] = event.target.value;
+    }
+
     render() {
+        if (this.state.incorrect.length === 0) {
+            this.addIncorrect();
+        };
         let incorrectResponses = this.state.incorrect.map((val, index) => {
-            return (<Form.Group key={index}>
-                <Form.Label>Incorrect</Form.Label>
-                <Form.Control type="text" defaultValue={val}></Form.Control>
-            </Form.Group>)
+            return (
+                <Row fluid="md">
+                    <Form.Group key={index}>
+                        <Col>
+                            <Form.Label>
+                                Incorrect
+                            </Form.Label>
+                        </Col>
+                        <Col>
+                            <Form.Control type="text" onChange={event => this.handleIncorrectChange(event,index)} onFocusOut={this.updateSuper} defaultValue={val} />
+                        </Col>
+                    </Form.Group>
+                </Row>)
         })
 
         return (
-            <div>
-                <Form.Group>
-                    <Form.Label>
-                        Question
-                    </Form.Label>
-                    {
-                        this.state.question === '' ?
-                            <Form.Control
-                                type="text"
-                                placeholder="Enter the question."
-                                onChange={this.handleQuestionChange}>
-                            </Form.Control> :
-                            <Form.Control
-                                type="text"
-                                defaultValue={this.question}
-                                onChange={this.handleQuestionChange}>
-                            </Form.Control>
-                    }
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>
-                        Correct answer
-                    </Form.Label>
-                    {
-                        this.state.correct === '' ?
-                            <Form.Control
-                                type="text"
-                                className="correct"
-                                onChange={this.handleCorrectChange}
-                            >
-                            </Form.Control>
-                            :
-                            <Form.Control
-                                type="text"
-                                className="correct" defaultValue={this.state.correct}
-                                onChange={this.handleCorrectChange}>
-                            </Form.Control>
-                    }
-                </Form.Group>
+            <Container key={this.state.index} className="justify-content-md-center align-items-center">
+                <Row>
+                    <Form.Group>
+                        <Col>
+                            <Form.Label>
+                                Question
+                            </Form.Label>
+                        </Col>
+                        {
+                            this.state.question === '' ?
+                                <Col>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Enter the question."
+                                        onChange={this.handleQuestionChange}>
+                                    </Form.Control>
+                                </Col>
+                                :
+                                <Col>
+                                    <Form.Control
+                                        type="text"
+                                        defaultValue={this.question}
+                                        onChange={this.handleQuestionChange}>
+                                    </Form.Control>
+                                </Col>
+                        }
+                    </Form.Group>
+                </Row>
+                <Row>
+                    <Form.Group>
+                        <Col>
+                            <Form.Label>
+                                Correct answer
+                            </Form.Label>
+                        </Col>
+                        {
+                            this.state.correct === '' ?
+                                <Col>
+                                    <Form.Control
+                                        type="text"
+                                        className="correct"
+                                        onChange={this.handleCorrectChange}
+                                    />
+                                </Col>
+                                :
+                                <Col>
+                                    <Form.Control
+                                        type="text"
+                                        className="correct" defaultValue={this.state.correct}
+                                        onChange={this.handleCorrectChange} />
+                                </Col>
+                        }
+                    </Form.Group>
+                </Row>
                 {incorrectResponses}
-                <button  className='primary' id="addIncorrect" onClick={this.addIncorrect}>Add Incorrect</button>
-            </div>
+                <button className='primary' id="addIncorrect" onClick={this.addIncorrect}>Add Incorrect</button>
+            </Container>
         )
     }
 }

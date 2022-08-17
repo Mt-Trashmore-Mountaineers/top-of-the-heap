@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Form } from "react-bootstrap";
 import Question from "./Question.js";
+import "./css/CreateQuiz.css";
 
 
 class CreateQuiz extends React.Component {
@@ -21,13 +22,11 @@ class CreateQuiz extends React.Component {
         this.setState({
             questions: questions
         })
-        console.log("here");
 
     }
 
-    render() {
-        if (this.state.questions.length === 0) {
-            let questions = [];
+    addQuestion = () => {
+        let questions = this.state.questions;
             questions.push({
                 index: "0",
                 question: '',
@@ -39,6 +38,11 @@ class CreateQuiz extends React.Component {
             this.setState({
                 questions: questions
             })
+    }
+
+    render() {
+        if (this.state.questions.length === 0) {
+            this.addQuestion();
         }
         return (
             <Form onSubmit={this.prevent}>
@@ -46,9 +50,9 @@ class CreateQuiz extends React.Component {
                     <Form.Control type="text" placeholder="Enter the quiz name">
                     </Form.Control>
                 </Form.Group>
-                <Card>
-                    {this.state.questions.map((val, index) => {
-                        return (
+                {this.state.questions.map((val, index) => {
+                    return (
+                        <Card>
                             <Question
                                 key={index}
                                 index={index}
@@ -57,10 +61,10 @@ class CreateQuiz extends React.Component {
                                 incorrect={val.incorrect}
                                 updateQuestionsState={this.updateQuestionsState}
                             />
-                        )
-                    })}
-                </Card>
-                
+                        </Card>
+                    )
+                })}
+                <button className="primary" onClick={this.addQuestion}>Add Question</button>
             </Form>
         )
     }
