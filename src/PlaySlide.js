@@ -17,7 +17,6 @@ class PlaySlide extends React.Component {
   }
 
   shuffle = () => {
-    console.log('shuffle', this.props.question.correct_answer)
     let array = [];
     for (let i = 0; i < this.props.question.incorrect_answers.length; i++) array.push(i);
     for (let i = array.length - 1; i > 0; i--) {

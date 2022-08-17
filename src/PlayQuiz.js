@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card } from 'react-bootstrap';
+import { Button, Card, ListGroup, ListGroupItem, ProgressBar } from 'react-bootstrap';
 import PlaySlide from './PlaySlide';
 import QuizSummary from './QuizSummary';
 
@@ -95,7 +95,6 @@ class PlayQuiz extends React.Component {
     newScore.total++;
     newScore[difficulty]++;
     newScore[category]++;
-    console.log(newScore);
     this.setState({ score: newScore })
   }
 
@@ -104,6 +103,7 @@ class PlayQuiz extends React.Component {
   render() {
     return (
       <>
+        <ProgressBar now={100 * (this.state.currentQuestion + 1) / (this.state.quiz.questions.length + 1)} />
         {this.state.currentQuestion < this.state.quiz.questions.length &&
           <>
             {this.state.currentQuestion === -1 ?
@@ -118,19 +118,37 @@ class PlayQuiz extends React.Component {
                   <PlaySlide key={this.state.currentQuestion} question={this.state.quiz.questions[this.state.currentQuestion]} score={this.state.score} updateScore={this.updateScore} />
                   <PlaySlide key={this.state.currentQuestion + 1} question={this.state.quiz.questions[this.state.currentQuestion + 1]} score={this.state.score} updateScore={this.updateScore} />
                 </>
-                : this.state.currentQuestion + 1 === this.state.quiz.questions.length ?
+                : this.state.currentQuestion + 1 < this.state.quiz.questions.length ?
                   <>
                     <PlaySlide key={this.state.currentQuestion - 1} question={this.state.quiz.questions[this.state.currentQuestion - 1]} score={this.state.score} updateScore={this.updateScore} />
                     <PlaySlide key={this.state.currentQuestion} question={this.state.quiz.questions[this.state.currentQuestion]} score={this.state.score} updateScore={this.updateScore} />
-                    <Card><Card.Title>Dummy</Card.Title></Card>
+                    <PlaySlide key={this.state.currentQuestion + 1} question={this.state.quiz.questions[this.state.currentQuestion + 1]} score={this.state.score} updateScore={this.updateScore} />
                   </>
                   : <>
                     <PlaySlide key={this.state.currentQuestion - 1} question={this.state.quiz.questions[this.state.currentQuestion - 1]} score={this.state.score} updateScore={this.updateScore} />
                     <PlaySlide key={this.state.currentQuestion} question={this.state.quiz.questions[this.state.currentQuestion]} score={this.state.score} updateScore={this.updateScore} />
-                    <PlaySlide key={this.state.currentQuestion + 1} question={this.state.quiz.questions[this.state.currentQuestion + 1]} score={this.state.score} updateScore={this.updateScore} />
+                    <Card><Card.Title>Dummy</Card.Title></Card>
                   </>}
             <Button onClick={this.nextSlide}>Next Question</Button>
           </>}
+        {this.state.currentQuestion === this.state.quiz.questions.length ?
+          <Card>
+            <Card.Title>Score</Card.Title>
+            <ListGroup>
+              <ListGroupItem>
+                Score: {this.state.score.total} / {this.state.quiz.questions.length}
+              </ListGroupItem>
+            </ListGroup>
+          </Card>
+          : <Card>
+            <Card.Title>Score</Card.Title>
+            <ListGroup>
+              <ListGroupItem>
+                Score: {this.state.score.total}
+              </ListGroupItem>
+            </ListGroup>
+          </Card>
+        }
       </>
     )
   }
