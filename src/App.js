@@ -6,6 +6,7 @@ import { withAuth0 } from '@auth0/auth0-react';
 import QuizList from './QuizList.js';
 import About from './About.js';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import CreateQuiz from './CreateQuiz';
 
 class App extends React.Component {
   render() {
@@ -34,6 +35,7 @@ class App extends React.Component {
         <Routes>
           <Route path="user" element={<QuizList />} ></Route>
           <Route path="about" element={<About />} ></Route>
+          <Route path="create" element={<CreateQuiz quiz={''} questions={[]} email={user ? user.email: ''} title=''/>} ></Route>
         </Routes>
       </Router>
     )

@@ -58,19 +58,20 @@ class CreateQuiz extends React.Component {
         try {
             let url = `${process.env.REACT_APP_SERVER}/new`;
             let newQuiz;
+            console.log(this.props.email);
             if (this.props.email) {
                 newQuiz = {
                     title: this.state.title,
                     questions: this.state.questions,
                     email: this.props.email
                 }
-            }
+            
             console.log(newQuiz);
             let createdQuiz = await axios.post(url, newQuiz);
             console.log(createdQuiz);
             // display _id
             this.displayModal(createdQuiz.data);
-
+            }
         } catch (error) {
 
         }
