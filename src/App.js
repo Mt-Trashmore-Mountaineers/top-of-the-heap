@@ -30,7 +30,7 @@ class App extends React.Component {
                 }}>Log out</button> :
                 <button className="primary" onClick={loginWithRedirect}>Login</button>
             }
-            <img id="profile-picture" alt="profile" src={user ? user.picture : "nothing here"} />
+            <img id="profile-picture" alt="profile" src={user ? user.picture : `https://avatars.dicebear.com/api/bottts/${Math.round(Math.random() * 1000)}.svg`} />
           </div>
         </nav>
         <Routes>

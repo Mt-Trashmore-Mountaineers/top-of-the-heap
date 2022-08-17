@@ -28,8 +28,7 @@ class CreateQuiz extends React.Component {
         questions[parseInt(question.index)] = question;
         this.setState({
             questions: questions
-        })
-
+        });
     }
 
 
@@ -39,38 +38,49 @@ class CreateQuiz extends React.Component {
             index: "0",
             question: '',
             correct: '',
-            incorrect:
-                [''],
+            incorrect: [''],
             updateQuestionsState: this.updateQuestionsState
         })
         this.setState({
             questions: questions
+        });
+    }
+
+    addTriviaQuestion = async () => {
+        let questions = this.state.questions;
+        let data = await axios.get("https://opentdb.com/api.php?amount=10&type=multiple");
+        let question = await data.data.results[0];
+        questions.push({
+            index: "0",
+            question: question.question,
+            correct: question.correct_answer,
+            incorrect: question.incorrect_answers,
+            updateQuestionsState: this.updateQuestionsState
         })
+        this.setState({
+            questions: questions
+        });
     }
 
     handleTitleChange = (event) => {
         this.setState({
             title: event.target.value
-        })
+        });
     }
 
     postQuiz = async () => {
         try {
             let url = `${process.env.REACT_APP_SERVER}/new`;
             let newQuiz;
-            console.log(this.props.email);
             if (this.props.email) {
                 newQuiz = {
                     title: this.state.title,
                     questions: this.state.questions,
                     email: this.props.email
                 }
-            
-            console.log(newQuiz);
-            let createdQuiz = await axios.post(url, newQuiz);
-            console.log(createdQuiz);
-            // display _id
-            this.displayModal(createdQuiz.data);
+                let createdQuiz = await axios.post(url, newQuiz);
+                // display _id
+                this.displayModal(createdQuiz.data);
             }
         } catch (error) {
 
@@ -82,13 +92,12 @@ class CreateQuiz extends React.Component {
             showModal: true,
             displayQuizId: quiz._id
         });
-        console.log('display?')
     }
 
     handleOnHide = () => {
         this.setState({
             showModal: false
-        })
+        });
     }
 
     render() {
@@ -106,7 +115,6 @@ class CreateQuiz extends React.Component {
                                 :
                                 <Form.Control type="text" onChange={this.handleTitleChange} placeholder="Enter the quiz name">
                                 </Form.Control>
-
                         }
 
                     </Form.Group>
@@ -125,6 +133,7 @@ class CreateQuiz extends React.Component {
                         )
                     })}
                     <button className="primary" onClick={this.addQuestion}>Add Question</button>
+                    <button className="primary" onClick={this.addTriviaQuestion}>Get Trivia Question</button>
                     <button className="primary" onClick={this.postQuiz}>Submit Quiz</button>
                 </Form>
                 <Modal show={this.state.showModal} onHide={this.handleOnHide}>
