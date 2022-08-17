@@ -37,7 +37,7 @@
     margin: 5px;
 }
 
-a.primary {
+a.primary, Link.primary {
     text-align: center;
     transition: all 20ms ease-in-out;
     min-width: 60px;
@@ -51,8 +51,19 @@ a.primary {
     box-shadow: 0px 4px 0px blue;
 }
 
-a.primary:active {
+a.primary:active, Link.primary {
     box-shadow: 0px 0px 0px blue;
+    translate: 0px 4px;
+}
+
+a.primary.grey {
+    background-color: darkgray;
+    color: black;
+    box-shadow: 0px 4px 0px darkslategray;
+}
+
+a.primary.grey:active {
+    box-shadow: 0px 0px 0px darkslategray;
     translate: 0px 4px;
 }
 

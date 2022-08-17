@@ -2,9 +2,6 @@ import React from 'react';
 import './css/App.css';
 
 class About extends React.Component {
-    handleToggle = () => {
-        this.props.toggleModal(this.props.index);
-    }
     render() {
         return (
             <div className="main-container">
