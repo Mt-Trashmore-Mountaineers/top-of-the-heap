@@ -129,7 +129,7 @@ class PlayQuiz extends React.Component {
                     <PlaySlide key={this.state.currentQuestion} question={this.state.quiz.questions[this.state.currentQuestion]} score={this.state.score} updateScore={this.updateScore} />
                     <Card><Card.Title>Dummy</Card.Title></Card>
                   </>}
-            <Button onClick={this.nextSlide}>Next Question</Button>
+            <Button onClick={this.nextSlide}>{this.state.currentQuestion === -1 ? 'Start' : this.state.currentQuestion + 1 === this.state.quiz.questions.length ? 'Finish' : 'Next Question'}</Button>
           </>}
         {this.state.currentQuestion === this.state.quiz.questions.length ?
           <Card>
