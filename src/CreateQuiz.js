@@ -48,7 +48,7 @@ class CreateQuiz extends React.Component {
 
     addTriviaQuestion = async () => {
         let questions = this.state.questions;
-        let data = await axios.get("https://opentdb.com/api.php?amount=1&category=18&difficulty=medium&type=multiple");
+        let data = await axios.get("https://opentdb.com/api.php?amount=10&type=multiple");
         let question = await data.data.results[0];
         questions.push({
             index: "0",
