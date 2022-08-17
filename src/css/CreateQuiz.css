@@ -1,0 +1,21 @@
+form {
+    width: 80%;
+    margin: 2% 10%;
+}
+
+.card{
+    padding: 0 1%;
+}
+
+.deleteIncorrect{
+    border-radius: 50%;
+}
+
+label {
+    padding-left: 2%;
+    padding-top: 1%;
+}
+
+#addIncorrect{
+    margin: 2%;
+}
