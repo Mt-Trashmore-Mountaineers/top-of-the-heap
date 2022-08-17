@@ -129,8 +129,8 @@ class PlayQuiz extends React.Component {
                     <PlaySlide key={this.state.currentQuestion} question={this.state.quiz.questions[this.state.currentQuestion]} score={this.state.score} updateScore={this.updateScore} />
                     <PlaySlide key={this.state.currentQuestion + 1} question={this.state.quiz.questions[this.state.currentQuestion + 1]} score={this.state.score} updateScore={this.updateScore} />
                   </>}
+            <Button onClick={this.nextSlide}>Next Question</Button>
           </>}
-        <Button onClick={this.nextSlide}>Next Question</Button>
       </>
     )
   }

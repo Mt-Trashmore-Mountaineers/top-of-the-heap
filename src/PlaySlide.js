@@ -6,6 +6,7 @@ class PlaySlide extends React.Component {
     super(props);
     this.state = {
       shuffledAnswers: [],
+      unanswered: true,
       correctIndex: null,
       correct: null,
       incorrect: null
@@ -35,12 +36,12 @@ class PlaySlide extends React.Component {
   }
 
   scoreQuestion = (event) => {
-    if (parseInt(event.target.id) === this.state.correctIndex) {
-      this.props.updateScore(this.props.question.difficulty, this.props.question.category)
-    } else {
-      this.setState({ incorrect: parseInt(event.target.id) });
+    if (this.state.unanswered) {
+      parseInt(event.target.id) === this.state.correctIndex ?
+        this.props.updateScore(this.props.question.difficulty, this.props.question.category)
+        : this.setState({ incorrect: parseInt(event.target.id) });
+      this.setState({ unanswered: false, correct: this.state.correctIndex });
     }
-    this.setState({ correct: this.state.correctIndex });
   }
 
   render() {
