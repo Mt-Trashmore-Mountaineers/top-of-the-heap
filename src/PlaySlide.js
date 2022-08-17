@@ -11,6 +11,9 @@ class PlaySlide extends React.Component {
       incorrect: null
     }
   }
+  componentDidMount = () => {
+    this.shuffle();
+  }
 
   shuffle = () => {
     let array = [];
@@ -23,22 +26,31 @@ class PlaySlide extends React.Component {
     }
     let shuffledAnswers = array.map(i => this.props.question.incorrect_answers[i]);
     let insert = Math.floor(Math.random() * (array.length + 1))
-    shuffledAnswers.splice(insert,0,this.state.correct_answer);
+    shuffledAnswers.splice(insert, 0, this.props.question.correct_answer);
+    console.log(shuffledAnswers);
     this.setState({
       shuffledAnswers: shuffledAnswers,
       correctIndex: insert
     })
   }
 
+  scoreQuestion = (event) => {
+    console.log(event);
+    if (event.target.id !== this.state.correctIndex) this.setState({ incorrect: parseInt(event.target.id) });
+    this.setState({ correct: this.state.correctIndex });
+  }
+
   render() {
     return (
       <Card>
-        <Card.Title>{this.props.question.title}</Card.Title>
+        <Card.Title>{this.props.question.question}</Card.Title>
         <ListGroup>
           {this.state.shuffledAnswers.map((answer, index) => {
             return (
               <ListGroup.Item
+                id={index}
                 key={index}
+                onClick={this.scoreQuestion}
                 style={{
                   backgroundColor:
                     this.state.correct === index ? 'green'
