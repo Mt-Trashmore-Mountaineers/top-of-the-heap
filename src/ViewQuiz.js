@@ -1,7 +1,8 @@
 import React from 'react';
-import { Button, Modal } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import ViewQuestion from './ViewQuestion';
 import { Link } from 'react-router-dom';
+import './css/button.css';
 
 class ViewQuiz extends React.Component {
   handleDelete = (event) => {
@@ -16,13 +17,9 @@ class ViewQuiz extends React.Component {
         <Modal.Body>
           {this.props.quiz.questions.map((question, index) => <ViewQuestion question={question} key={index} />)}
           <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
-            <Button variant='success'>
-              <Link to={`/play/${this.props.quiz._id}`}>Play</Link>
-            </Button>
-            <Button variant='primary'>
-              <Link to={`/update/${this.props.quiz._id}`}>Update</Link>
-            </Button>
-            <Button variant='danger' onClick={this.handleDelete}>Delete</Button>
+            <Link className="primary" to={`/play/${this.props.quiz._id}`}>Play</Link>
+            <Link className="primary grey" to={`/update/${this.props.quiz._id}`}>Update</Link>
+            <button className="danger" onClick={this.handleDelete}>Delete</button>
           </div>
         </Modal.Body>
       </Modal>

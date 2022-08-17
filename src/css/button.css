@@ -30,3 +30,14 @@ button.default:active {
     box-shadow: 0px 0px 0px darkslategrey;
     translate: 0px 4px;
 }
+
+button.danger {
+    background-color: crimson;
+    color: white;
+    box-shadow: 0px 4px 0px darkred;
+}
+
+button.danger:active {
+    box-shadow: 0px 0px 0px darkred;
+    translate: 0px 4px;
+}
