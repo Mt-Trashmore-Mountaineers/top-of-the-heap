@@ -18,16 +18,16 @@ class PlaySlide extends React.Component {
 
   shuffle = () => {
     let array = [];
-    for (let i = 0; i < this.props.question.incorrect_answers.length; i++) array.push(i);
+    for (let i = 0; i < this.props.question.incorrect.length; i++) array.push(i);
     for (let i = array.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
       let temp = array[i];
       array[i] = array[j];
       array[j] = temp;
     }
-    let shuffledAnswers = array.map(i => this.props.question.incorrect_answers[i]);
+    let shuffledAnswers = array.map(i => this.props.question.incorrect[i]);
     let insert = Math.floor(Math.random() * (array.length + 1))
-    shuffledAnswers.splice(insert, 0, this.props.question.correct_answer);
+    shuffledAnswers.splice(insert, 0, this.props.question.correct);
     this.setState({
       shuffledAnswers: shuffledAnswers,
       correctIndex: insert
