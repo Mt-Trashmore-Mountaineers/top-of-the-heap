@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, ListGroup, ListGroupItem, ProgressBar } from 'react-bootstrap';
+import { Button, Card, Carousel, ListGroup, ListGroupItem, ProgressBar } from 'react-bootstrap';
 import PlaySlide from './PlaySlide';
 import QuizSummary from './QuizSummary';
 
@@ -59,7 +59,7 @@ class PlayQuiz extends React.Component {
           ]
         }]
       },
-      currentQuestion: -1,
+      currentQuestion: 0,
       score: {
         total: 0,
         easy: 0,
@@ -103,35 +103,39 @@ class PlayQuiz extends React.Component {
   render() {
     return (
       <>
-        <ProgressBar now={100 * (this.state.currentQuestion + 1) / (this.state.quiz.questions.length + 1)} />
-        {this.state.currentQuestion < this.state.quiz.questions.length &&
+        <ProgressBar now={100 * (this.state.currentQuestion) / (this.state.quiz.questions.length + 1)} />
+        {this.state.currentQuestion < this.state.quiz.questions.length + 1 &&
           <>
-            <div>
-            <QuizSummary quiz={this.state.quiz} toggleModal={this.poke} />
-{this.state.quiz.questions.map((question,index)=> {
+            <Carousel activeIndex={this.state.currentQuestion} controls={false} indicators={false} interval={null} wrap={false} touch={false}>
+              <Carousel.Item><QuizSummary quiz={this.state.quiz} toggleModal={this.poke} /></Carousel.Item>
+              {this.state.quiz.questions.map((question, index) => {
+                return (
+                  <Carousel.Item>
                     <PlaySlide key={index} question={question} score={this.state.score} updateScore={this.updateScore} />
-
-})}
-            </div>
-            <Button onClick={this.nextSlide}>{this.state.currentQuestion === -1 ? 'Start' : this.state.currentQuestion + 1 === this.state.quiz.questions.length ? 'Finish' : 'Next Question'}</Button>
+                  </Carousel.Item>
+                )
+              })}
+            </Carousel>
+            <Button onClick={this.nextSlide}>{this.state.currentQuestion === 0 ? 'Start' : this.state.currentQuestion === this.state.quiz.questions.length ? 'Finish' : 'Next Question'}</Button>
           </>}
-        {this.state.currentQuestion === this.state.quiz.questions.length ?
-          <Card>
-            <Card.Title>Score</Card.Title>
-            <ListGroup>
-              <ListGroupItem>
-                Score: {this.state.score.total} / {this.state.quiz.questions.length}
-              </ListGroupItem>
-            </ListGroup>
-          </Card>
-          : <Card>
-            <Card.Title>Score</Card.Title>
-            <ListGroup>
-              <ListGroupItem>
-                Score: {this.state.score.total}
-              </ListGroupItem>
-            </ListGroup>
-          </Card>
+        {
+          this.state.currentQuestion === this.state.quiz.questions.length + 1 ?
+            <Card>
+              <Card.Title>Score</Card.Title>
+              <ListGroup>
+                <ListGroupItem>
+                  Score: {this.state.score.total} / {this.state.quiz.questions.length}
+                </ListGroupItem>
+              </ListGroup>
+            </Card>
+            : <Card>
+              <Card.Title>Score</Card.Title>
+              <ListGroup>
+                <ListGroupItem>
+                  Score: {this.state.score.total}
+                </ListGroupItem>
+              </ListGroup>
+            </Card>
         }
       </>
     )
