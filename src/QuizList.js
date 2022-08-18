@@ -1,12 +1,8 @@
-<<<<<<< HEAD
-=======
-import { useAuth0 } from "@auth0/auth0-react";
-import './css/App.css';
->>>>>>> 401105dab1f5b1c61ac64337e122b9f06ff3d4c8
 import React from 'react';
 import axios from 'axios';
+import { ListGroup } from "react-bootstrap";
 import QuizSummary from "./QuizSummary";
-//import ViewQuiz from "./ViewQuiz";
+import ViewQuiz from "./ViewQuiz";
 
 class QuizList extends React.Component {
   constructor(props) {
@@ -73,7 +69,7 @@ class QuizList extends React.Component {
     return (
       <section>
         <h2>User's Quizzes</h2>
-        <div className="grid">
+        <ListGroup>
           {
             this.state.quizzes.length > 0 &&
             this.state.quizzes.map((quiz, index) =>
@@ -84,18 +80,13 @@ class QuizList extends React.Component {
                 toggleModal={this.toggleModal}
               />)
           }
-<<<<<<< HEAD
         </ListGroup>
-        {/* <ViewQuiz
-=======
-        </div>
         <ViewQuiz
->>>>>>> 401105dab1f5b1c61ac64337e122b9f06ff3d4c8
           quiz={this.state.quizzes[this.state.quizIndex]}
           deleteQuiz={this.deleteQuiz}
           showModal={this.state.showModal}
           toggleModal={this.toggleModal}
-        /> */}
+        />
       </section>
     )
   }
