@@ -46,6 +46,15 @@ class App extends React.Component {
             <Link to={"/play"} className="primary">Play</Link>
             <Link to={"/"} className="primary">About</Link>
           </div>
+          {
+            // Log in/out button
+            isAuthenticated ?
+              <button className="default" onClick={() => {
+                logout({ returnTo: window.location.origin });
+              }}>Log out</button> :
+              <button className="primary" onClick={loginWithRedirect}>Login</button>
+          }
+          <img onClick={this.handleProfileOpen} id="profile-picture" alt="profile" src={user ? user.picture : `https://avatars.dicebear.com/api/bottts/${Math.round(Math.random() * 1000)}.svg`} />
         </nav>
         <Routes>
           <Route path="/" element={<About />} ></Route>
