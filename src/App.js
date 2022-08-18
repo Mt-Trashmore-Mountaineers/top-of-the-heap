@@ -12,13 +12,13 @@ import QuizList from './QuizList';
 import UserStats from './UserStats.js';
 
 class App extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
       isProfileOpen: false,
       userQuizList: []
     }
+    this.profileStats = React.createRef();
   }
 
   handleProfileOpen = () => {
@@ -32,6 +32,15 @@ class App extends React.Component {
       });
     }
     // TODO - add profile stats
+  };
+
+  handleAppClick = (event) => {
+    console.log(this.profileStats.current);
+    if (this.state.isProfileOpen && (!this.profileStats.current.contains(event.target))) {
+      this.setState({
+        isProfileOpen: false
+      });
+    }
   };
 
   getQuizListByEmail = async (user) => {
@@ -56,7 +65,7 @@ class App extends React.Component {
     }
 
     return (
-      <Router className="App">
+      <Router className="App" onClick={this.handleAppClick}>
         <nav className="navbar">
           <h2>Quiz App</h2>
           <input className="searchbar"></input>
@@ -77,7 +86,7 @@ class App extends React.Component {
           <img onClick={this.handleProfileOpen} id="profile-picture" alt="profile" src={user ? user.picture : `https://avatars.dicebear.com/api/bottts/${Math.round(Math.random() * 1000)}.svg`} />
           {
             (this.state.isProfileOpen && user) &&
-            <UserStats user={user} points={0} />
+            <UserStats ref={this.profileStats} user={user} points={0} />
           }
         </nav>
         <Routes>

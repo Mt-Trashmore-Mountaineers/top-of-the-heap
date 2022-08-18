@@ -35,9 +35,8 @@ export class UserStats extends React.Component {
   };
 
   render() {
-
     let expInfo = this.Level(this.state.points);
-
+    
     return (
       <aside className="profile-stats">
         <div>
