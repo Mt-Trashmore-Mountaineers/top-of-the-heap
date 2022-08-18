@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import { ListGroup } from "react-bootstrap";
 import QuizSummary from "./QuizSummary";
 import ViewQuiz from "./ViewQuiz";
 
@@ -69,7 +68,7 @@ class QuizList extends React.Component {
     return (
       <section>
         <h2>User's Quizzes</h2>
-        <ListGroup>
+        <div className='grid'>
           {
             this.state.quizzes.length > 0 &&
             this.state.quizzes.map((quiz, index) =>
@@ -80,7 +79,7 @@ class QuizList extends React.Component {
                 toggleModal={this.toggleModal}
               />)
           }
-        </ListGroup>
+        </div>
         <ViewQuiz
           quiz={this.state.quizzes[this.state.quizIndex]}
           deleteQuiz={this.deleteQuiz}
