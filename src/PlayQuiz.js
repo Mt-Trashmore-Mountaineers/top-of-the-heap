@@ -106,29 +106,13 @@ class PlayQuiz extends React.Component {
         <ProgressBar now={100 * (this.state.currentQuestion + 1) / (this.state.quiz.questions.length + 1)} />
         {this.state.currentQuestion < this.state.quiz.questions.length &&
           <>
-            {this.state.currentQuestion === -1 ?
-              <>
-                <Card><Card.Title>Dummy</Card.Title></Card>
-                <QuizSummary quiz={this.state.quiz} toggleModal={this.poke} />
-                <PlaySlide key={this.state.currentQuestion + 1} question={this.state.quiz.questions[this.state.currentQuestion + 1]} score={this.state.score} updateScore={this.updateScore} />
-              </>
-              : this.state.currentQuestion === 0 ?
-                <>
-                  <QuizSummary quiz={this.state.quiz} toggleModal={this.poke} />
-                  <PlaySlide key={this.state.currentQuestion} question={this.state.quiz.questions[this.state.currentQuestion]} score={this.state.score} updateScore={this.updateScore} />
-                  <PlaySlide key={this.state.currentQuestion + 1} question={this.state.quiz.questions[this.state.currentQuestion + 1]} score={this.state.score} updateScore={this.updateScore} />
-                </>
-                : this.state.currentQuestion + 1 < this.state.quiz.questions.length ?
-                  <>
-                    <PlaySlide key={this.state.currentQuestion - 1} question={this.state.quiz.questions[this.state.currentQuestion - 1]} score={this.state.score} updateScore={this.updateScore} />
-                    <PlaySlide key={this.state.currentQuestion} question={this.state.quiz.questions[this.state.currentQuestion]} score={this.state.score} updateScore={this.updateScore} />
-                    <PlaySlide key={this.state.currentQuestion + 1} question={this.state.quiz.questions[this.state.currentQuestion + 1]} score={this.state.score} updateScore={this.updateScore} />
-                  </>
-                  : <>
-                    <PlaySlide key={this.state.currentQuestion - 1} question={this.state.quiz.questions[this.state.currentQuestion - 1]} score={this.state.score} updateScore={this.updateScore} />
-                    <PlaySlide key={this.state.currentQuestion} question={this.state.quiz.questions[this.state.currentQuestion]} score={this.state.score} updateScore={this.updateScore} />
-                    <Card><Card.Title>Dummy</Card.Title></Card>
-                  </>}
+            <div>
+            <QuizSummary quiz={this.state.quiz} toggleModal={this.poke} />
+{this.state.quiz.questions.map((question,index)=> {
+                    <PlaySlide key={index} question={question} score={this.state.score} updateScore={this.updateScore} />
+
+})}
+            </div>
             <Button onClick={this.nextSlide}>{this.state.currentQuestion === -1 ? 'Start' : this.state.currentQuestion + 1 === this.state.quiz.questions.length ? 'Finish' : 'Next Question'}</Button>
           </>}
         {this.state.currentQuestion === this.state.quiz.questions.length ?
