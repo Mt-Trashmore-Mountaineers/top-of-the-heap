@@ -12,7 +12,6 @@ import QuizList from './QuizList';
 import UserStats from './UserStats.js';
 
 class App extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -79,7 +78,7 @@ class App extends React.Component {
           <img onClick={this.handleProfileOpen} id="profile-picture" alt="profile" src={user ? user.picture : `https://avatars.dicebear.com/api/bottts/${Math.round(Math.random() * 1000)}.svg`} />
           {
             (this.state.isProfileOpen && user) &&
-            <UserStats user={user} points={0} />
+            <UserStats handleProfileOpen={this.handleProfileOpen} user={user} points={0} />
           }
         </nav>
         <Routes>

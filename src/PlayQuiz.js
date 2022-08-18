@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, ListGroup, ListGroupItem, ProgressBar } from 'react-bootstrap';
+import { Button, Card, Carousel, ListGroup, ListGroupItem, ProgressBar } from 'react-bootstrap';
 import PlaySlide from './PlaySlide';
 import QuizSummary from './QuizSummary';
 
@@ -59,7 +59,7 @@ class PlayQuiz extends React.Component {
           ]
         }]
       },
-      currentQuestion: -1,
+      currentQuestion: 0,
       score: {
         total: 0,
         easy: 0,
@@ -103,51 +103,39 @@ class PlayQuiz extends React.Component {
   render() {
     return (
       <>
-        <ProgressBar now={100 * (this.state.currentQuestion + 1) / (this.state.quiz.questions.length + 1)} />
-        {this.state.currentQuestion < this.state.quiz.questions.length &&
+        <ProgressBar now={100 * (this.state.currentQuestion) / (this.state.quiz.questions.length + 1)} />
+        {this.state.currentQuestion < this.state.quiz.questions.length + 1 &&
           <>
-            {this.state.currentQuestion === -1 ?
-              <>
-                <Card><Card.Title>Dummy</Card.Title></Card>
-                <QuizSummary quiz={this.state.quiz} toggleModal={this.poke} />
-                <PlaySlide key={this.state.currentQuestion + 1} question={this.state.quiz.questions[this.state.currentQuestion + 1]} score={this.state.score} updateScore={this.updateScore} />
-              </>
-              : this.state.currentQuestion === 0 ?
-                <>
-                  <QuizSummary quiz={this.state.quiz} toggleModal={this.poke} />
-                  <PlaySlide key={this.state.currentQuestion} question={this.state.quiz.questions[this.state.currentQuestion]} score={this.state.score} updateScore={this.updateScore} />
-                  <PlaySlide key={this.state.currentQuestion + 1} question={this.state.quiz.questions[this.state.currentQuestion + 1]} score={this.state.score} updateScore={this.updateScore} />
-                </>
-                : this.state.currentQuestion + 1 < this.state.quiz.questions.length ?
-                  <>
-                    <PlaySlide key={this.state.currentQuestion - 1} question={this.state.quiz.questions[this.state.currentQuestion - 1]} score={this.state.score} updateScore={this.updateScore} />
-                    <PlaySlide key={this.state.currentQuestion} question={this.state.quiz.questions[this.state.currentQuestion]} score={this.state.score} updateScore={this.updateScore} />
-                    <PlaySlide key={this.state.currentQuestion + 1} question={this.state.quiz.questions[this.state.currentQuestion + 1]} score={this.state.score} updateScore={this.updateScore} />
-                  </>
-                  : <>
-                    <PlaySlide key={this.state.currentQuestion - 1} question={this.state.quiz.questions[this.state.currentQuestion - 1]} score={this.state.score} updateScore={this.updateScore} />
-                    <PlaySlide key={this.state.currentQuestion} question={this.state.quiz.questions[this.state.currentQuestion]} score={this.state.score} updateScore={this.updateScore} />
-                    <Card><Card.Title>Dummy</Card.Title></Card>
-                  </>}
-            <Button onClick={this.nextSlide}>{this.state.currentQuestion === -1 ? 'Start' : this.state.currentQuestion + 1 === this.state.quiz.questions.length ? 'Finish' : 'Next Question'}</Button>
+            <Carousel activeIndex={this.state.currentQuestion} controls={false} indicators={false} interval={null} wrap={false} touch={false}>
+              <Carousel.Item><QuizSummary quiz={this.state.quiz} toggleModal={this.poke} /></Carousel.Item>
+              {this.state.quiz.questions.map((question, index) => {
+                return (
+                  <Carousel.Item>
+                    <PlaySlide key={index} question={question} score={this.state.score} updateScore={this.updateScore} />
+                  </Carousel.Item>
+                )
+              })}
+            </Carousel>
+            <Button onClick={this.nextSlide}>{this.state.currentQuestion === 0 ? 'Start' : this.state.currentQuestion === this.state.quiz.questions.length ? 'Finish' : 'Next Question'}</Button>
           </>}
-        {this.state.currentQuestion === this.state.quiz.questions.length ?
-          <Card>
-            <Card.Title>Score</Card.Title>
-            <ListGroup>
-              <ListGroupItem>
-                Score: {this.state.score.total} / {this.state.quiz.questions.length}
-              </ListGroupItem>
-            </ListGroup>
-          </Card>
-          : <Card>
-            <Card.Title>Score</Card.Title>
-            <ListGroup>
-              <ListGroupItem>
-                Score: {this.state.score.total}
-              </ListGroupItem>
-            </ListGroup>
-          </Card>
+        {
+          this.state.currentQuestion === this.state.quiz.questions.length + 1 ?
+            <Card>
+              <Card.Title>Score</Card.Title>
+              <ListGroup>
+                <ListGroupItem>
+                  Score: {this.state.score.total} / {this.state.quiz.questions.length}
+                </ListGroupItem>
+              </ListGroup>
+            </Card>
+            : <Card>
+              <Card.Title>Score</Card.Title>
+              <ListGroup>
+                <ListGroupItem>
+                  Score: {this.state.score.total}
+                </ListGroupItem>
+              </ListGroup>
+            </Card>
         }
       </>
     )
