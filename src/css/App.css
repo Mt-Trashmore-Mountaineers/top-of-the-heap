@@ -86,11 +86,13 @@ a.primary.grey:active {
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: 90;
 }
 
 .profile-stats h1 {
     width: 200px;
     text-align: center;
+    z-index: 90;
 }
 
 .profile-stats div {
@@ -99,12 +101,14 @@ a.primary.grey:active {
     color: white;
     border-radius: 8px 8px 0px 0px;
     height: 90px;
+    z-index: 90;
 }
 
 .profile-stats img {
     position: relative;
     top: -20px;
     outline: 5px solid white;
+    z-index: 90;
 }
 
 .stats-container {
@@ -112,10 +116,12 @@ a.primary.grey:active {
     width: 100%;
     padding-left: 10px;
     padding-right: 10px;
+    z-index: 90;
 }
 
 .stats-container p {
     margin: 0;
+    z-index: 90;
 }
 
 .exp-bar-container {
@@ -124,6 +130,7 @@ a.primary.grey:active {
     background-color: darkgray;
     margin: 10px;
     border-radius: 10px;
+    z-index: 90;
 }
 
 .exp-bar {
@@ -131,4 +138,6 @@ a.primary.grey:active {
     background-color: var(--blue);
     display: block;
     border-radius: 10px;
+    transition: all 250ms ease-in-out;
+    z-index: 90;
 }
