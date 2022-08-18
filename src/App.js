@@ -60,7 +60,7 @@ class App extends React.Component {
     const { user, isAuthenticated, loginWithRedirect, logout } = this.props.auth0;
 
     if (user) {
-      // this.getQuizListByEmail(user);
+      this.getQuizListByEmail(user);
     }
 
     return (
