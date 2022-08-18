@@ -11,9 +11,7 @@ import PlayQuiz from './PlayQuiz';
 import QuizList from './QuizList';
 import UserStats from './UserStats.js';
 
-
 class App extends React.Component {
-
 
   constructor(props) {
     super(props);
@@ -37,15 +35,14 @@ class App extends React.Component {
   };
 
   getQuizListByEmail = async (user) => {
-    
-    if(user){
+    if (user) {
       let url = `${process.env.REACT_APP_SERVER}/quiz/email?email=${user.email}`;
       let quizList = await (await axios(url)).data;
-      this.setState({userQuizList: quizList})
+      this.setState({ userQuizList: quizList })
     }
   }
 
-  getQuizById = async (id) =>{
+  getQuizById = async (id) => {
     let url = `${process.env.REACT_APP_SERVER}/quiz/id?id=${id}`;
     let quiz = await axios(url);
     return quiz.data;
@@ -54,7 +51,7 @@ class App extends React.Component {
   render() {
     const { user, isAuthenticated, loginWithRedirect, logout } = this.props.auth0;
 
-    if(user){
+    if (user) {
       this.getQuizListByEmail(user);
     }
 
@@ -87,7 +84,7 @@ class App extends React.Component {
           <Route path="" element={<About />} ></Route>
           <Route path="create" element={<CreateQuiz quiz={''} questions={[]} email={user ? user.email : ''} title='' />} ></Route>
           <Route path="play" element={<PlayQuiz />} ></Route>
-          <Route path="user" element={<QuizList quizList={this.state.userQuizList}/>} ></Route>
+          <Route path="user" element={<QuizList quizList={this.state.userQuizList} />} ></Route>
         </Routes>
       </Router>
     )
