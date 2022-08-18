@@ -8,7 +8,7 @@ class About extends React.Component {
                 <h1 id="about">About the app</h1>
                 <p>
                     We hope to create a game that is a source of fun and entertainment.
-                    Who couldn&#39;t use a little more educational entertainment in their life.
+                    Who couldn't use a little more educational entertainment in their life.
                     Creating an environment where people can enjoy learning while playing.
                 </p>
                 <h1>About the developers</h1>
