@@ -141,3 +141,17 @@ a.primary.grey:active {
     transition: all 250ms ease-in-out;
     z-index: 90;
 }
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.quiz-card {
+    padding: 10px;
+    border: medium none;
+    box-shadow: rgb(34, 34, 34) 0px 0px 6px;
+    width: auto;
+    margin: 20px;
+    border-radius: 5px;
+}
