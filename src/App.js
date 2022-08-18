@@ -8,8 +8,31 @@ import About from './About.js';
 import CreateQuiz from './CreateQuiz';
 import PlayQuiz from './PlayQuiz';
 import QuizList from './QuizList';
+import UserStats from './UserStats.js';
+
 
 class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      isProfileOpen: false
+    }
+  }
+
+  handleProfileOpen = () => {
+    if (this.state.isProfileOpen) {
+      this.setState({
+        isProfileOpen: false
+      });
+    } else {
+      this.setState({
+        isProfileOpen: true
+      });
+    }
+    // TODO - add profile stats
+  };
+
   render() {
     const { user, isAuthenticated, loginWithRedirect, logout } = this.props.auth0;
     return (
@@ -30,7 +53,10 @@ class App extends React.Component {
                 }}>Log out</button> :
                 <button className="primary" onClick={loginWithRedirect}>Login</button>
             }
-            <img id="profile-picture" alt="profile" src={user ? user.picture : `https://avatars.dicebear.com/api/bottts/${Math.round(Math.random() * 1000)}.svg`} />
+            <img onClick={this.handleProfileOpen} id="profile-picture" alt="profile" src={user ? user.picture : `https://avatars.dicebear.com/api/bottts/${Math.round(Math.random() * 1000)}.svg`} />
+            {(this.state.isProfileOpen && user) &&
+              <UserStats user={user} points={56837} />
+            }
           </div>
         </nav>
         <Routes>

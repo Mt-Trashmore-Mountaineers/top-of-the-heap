@@ -37,7 +37,8 @@
     margin: 5px;
 }
 
-a.primary, Link.primary {
+a.primary,
+Link.primary {
     text-align: center;
     transition: all 20ms ease-in-out;
     min-width: 60px;
@@ -51,7 +52,8 @@ a.primary, Link.primary {
     box-shadow: 0px 4px 0px blue;
 }
 
-a.primary:active, Link.primary {
+a.primary:active,
+Link.primary {
     box-shadow: 0px 0px 0px blue;
     translate: 0px 4px;
 }
@@ -70,4 +72,63 @@ a.primary.grey:active {
 #profile-picture {
     height: 40px;
     border-radius: 50%;
+    cursor: pointer;
+}
+
+.profile-stats {
+    position: absolute;
+    right: 10px;
+    background-color: white;
+    color: black;
+    top: 60px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 6px #222;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-stats h1 {
+    width: 200px;
+    text-align: center;
+}
+
+.profile-stats div {
+    padding: 10px;
+    background-color: var(--blue);
+    color: white;
+    border-radius: 8px 8px 0px 0px;
+    height: 90px;
+}
+
+.profile-stats img {
+    position: relative;
+    top: -20px;
+    outline: 5px solid white;
+}
+
+.stats-container {
+    display: flex;
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.stats-container p {
+    margin: 0;
+}
+
+.exp-bar-container {
+    width: calc(100% - 20px);
+    height: 10px;
+    background-color: darkgray;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.exp-bar {
+    height: 10px;
+    background-color: var(--blue);
+    display: block;
+    border-radius: 10px;
 }
