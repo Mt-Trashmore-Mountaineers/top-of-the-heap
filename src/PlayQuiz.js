@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, Carousel, ListGroup, ListGroupItem, ProgressBar } from 'react-bootstrap';
+import { Button, Carousel, ListGroup, ListGroupItem, ProgressBar } from 'react-bootstrap';
 import PlaySlide from './PlaySlide';
 import QuizSummary from './QuizSummary';
 
@@ -120,22 +120,22 @@ class PlayQuiz extends React.Component {
           </>}
         {
           this.state.currentQuestion === this.state.quiz.questions.length + 1 ?
-            <Card>
-              <Card.Title>Score</Card.Title>
+            <div className="quiz-card">
+              <h3>Score</h3>
               <ListGroup>
                 <ListGroupItem>
                   Score: {this.state.score.total} / {this.state.quiz.questions.length}
                 </ListGroupItem>
               </ListGroup>
-            </Card>
-            : <Card>
-              <Card.Title>Score</Card.Title>
+            </div>
+            : <div className="quiz-card">
+              <h3>Score</h3>
               <ListGroup>
                 <ListGroupItem>
                   Score: {this.state.score.total}
                 </ListGroupItem>
               </ListGroup>
-            </Card>
+            </div>
         }
       </>
     )

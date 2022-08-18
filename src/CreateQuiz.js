@@ -1,7 +1,8 @@
 import React from "react";
 import axios from "axios";
-import { Card, Form, Modal } from "react-bootstrap";
+import { Form, Modal } from "react-bootstrap";
 import Question from "./Question.js";
+import "./css/App.css";
 import "./css/CreateQuiz.css";
 
 class CreateQuiz extends React.Component {
@@ -120,7 +121,7 @@ class CreateQuiz extends React.Component {
                     </Form.Group>
                     {this.state.questions.map((val, index) => {
                         return (
-                            <Card>
+                            <div className="quiz-card">
                                 <Question
                                     key={index}
                                     index={index}
@@ -129,7 +130,7 @@ class CreateQuiz extends React.Component {
                                     incorrect={val.incorrect}
                                     updateQuestionsState={this.updateQuestionsState}
                                 />
-                            </Card>
+                            </div>
                         )
                     })}
                     <button className="primary" onClick={this.addQuestion}>Add Question</button>
