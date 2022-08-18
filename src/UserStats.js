@@ -6,6 +6,22 @@ export class UserStats extends React.Component {
     this.state = {
       points: this.props.points
     };
+    this.bounds = React.createRef();
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      document.addEventListener('click', (event) => {
+        if (this.bounds.current === null) {
+          return;
+        }
+        if (this.bounds.current.contains(event.target)) {
+          return;
+        } else {
+          this.props.handleProfileOpen();
+        }
+      });
+    }, 200);
   }
 
   Level = (score) => {
@@ -28,7 +44,7 @@ export class UserStats extends React.Component {
     return ((val - min) / (max - min)) * 100;
   }
 
-  addPoints = () => {
+  AddPoints = () => {
     this.setState({
       points: this.state.points + 1000
     });
@@ -38,11 +54,11 @@ export class UserStats extends React.Component {
     let expInfo = this.Level(this.state.points);
     
     return (
-      <aside className="profile-stats">
+      <aside ref={this.bounds} className="profile-stats">
         <div>
           <h1>{this.props.user.given_name}</h1>
         </div>
-        <img onClick={this.addPoints} id="profile-picture" alt="profile" src={this.props.user.picture} />
+        <img onClick={this.AddPoints} id="profile-picture" alt="profile" src={this.props.user.picture} />
         <span className="stats-container">
           <p style={{
             flex: '1'

@@ -18,7 +18,6 @@ class App extends React.Component {
       isProfileOpen: false,
       userQuizList: []
     }
-    this.profileStats = React.createRef();
   }
 
   handleProfileOpen = () => {
@@ -61,11 +60,11 @@ class App extends React.Component {
     const { user, isAuthenticated, loginWithRedirect, logout } = this.props.auth0;
 
     if (user) {
-      this.getQuizListByEmail(user);
+      // this.getQuizListByEmail(user);
     }
 
     return (
-      <Router className="App" onClick={this.handleAppClick}>
+      <Router className="App">
         <nav className="navbar">
           <h2>Quiz App</h2>
           <input className="searchbar"></input>
@@ -86,7 +85,7 @@ class App extends React.Component {
           <img onClick={this.handleProfileOpen} id="profile-picture" alt="profile" src={user ? user.picture : `https://avatars.dicebear.com/api/bottts/${Math.round(Math.random() * 1000)}.svg`} />
           {
             (this.state.isProfileOpen && user) &&
-            <UserStats ref={this.profileStats} user={user} points={0} />
+            <UserStats handleProfileOpen={this.handleProfileOpen} user={user} points={0} />
           }
         </nav>
         <Routes>
