@@ -13,58 +13,6 @@ class PlayQuiz extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      // quiz: {
-      //   title: 'Test',
-      //   plays: 420,
-      //   questions: [{
-      //     "category": "General Knowledge",
-      //     "type": "multiple",
-      //     "difficulty": "medium",
-      //     "question": "What name represents the letter &quot;M&quot; in the NATO phonetic alphabet?",
-      //     "correct_answer": "Mike",
-      //     "incorrect_answers": [
-      //       "Matthew",
-      //       "Mark",
-      //       "Max"
-      //     ]
-      //   },
-      //   {
-      //     "category": "History",
-      //     "type": "multiple",
-      //     "difficulty": "medium",
-      //     "question": "The seed drill was invented by which British inventor?",
-      //     "correct_answer": "Jethro Tull",
-      //     "incorrect_answers": [
-      //       "Charles Babbage",
-      //       "Isaac Newton",
-      //       "J.J Thomson"
-      //     ]
-      //   },
-      //   {
-      //     "category": "History",
-      //     "type": "multiple",
-      //     "difficulty": "medium",
-      //     "question": "All of the following are names of the Seven Warring States EXCEPT:",
-      //     "correct_answer": "Zhai (翟)",
-      //     "incorrect_answers": [
-      //       "Zhao (趙)",
-      //       "Qin (秦)",
-      //       "Qi (齊)"
-      //     ]
-      //   },
-      //   {
-      //     "category": "General Knowledge",
-      //     "type": "multiple",
-      //     "difficulty": "easy",
-      //     "question": "What machine element is located in the center of fidget spinners?",
-      //     "correct_answer": "Bearings",
-      //     "incorrect_answers": [
-      //       "Axles",
-      //       "Gears",
-      //       "Belts"
-      //     ]
-      //   }]
-      // },
       currentQuestion: 0,
       score: {
         total: 0,
