@@ -23,7 +23,7 @@ class App extends React.Component {
     
     if(user){
       let url = `${process.env.REACT_APP_SERVER}/quiz/email?email=${user.email}`;
-      let quizList = await axios(url);
+      let quizList = await (await axios(url)).data;
       this.setState({userQuizList: quizList})
     }
   }
@@ -31,7 +31,7 @@ class App extends React.Component {
   getQuizById = async (id) =>{
     let url = `${process.env.REACT_APP_SERVER}/quiz/id?id=${id}`;
     let quiz = await axios(url);
-    return quiz;
+    return quiz.data;
   }
 
   render() {
