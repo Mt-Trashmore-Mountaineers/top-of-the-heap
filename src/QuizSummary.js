@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import './css/App.css';
 
 class QuizSummary extends React.Component {
   handleToggle = () => {
@@ -7,11 +7,11 @@ class QuizSummary extends React.Component {
   }
   render() {
     return (
-      <Card style={{ padding: '10px' }} onClick={this.handleToggle}>
-        <Card.Title>{this.props.quiz.title}</Card.Title>
-        <Card.Text>{this.props.quiz.questions.length} questions</Card.Text>
-        <Card.Text>{this.props.quiz.plays} plays</Card.Text>
-      </Card>
+      <div className="quiz-card" onClick={this.handleToggle}>
+        <h3>{this.props.quiz.title}</h3>
+        <p>{this.props.quiz.questions.length} questions</p>
+        <p>{this.props.quiz.plays} plays</p>
+      </div>
     )
   }
 }
