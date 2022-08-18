@@ -33,15 +33,6 @@ class App extends React.Component {
     // TODO - add profile stats
   };
 
-  handleAppClick = (event) => {
-    console.log(this.profileStats.current);
-    if (this.state.isProfileOpen && (!this.profileStats.current.contains(event.target))) {
-      this.setState({
-        isProfileOpen: false
-      });
-    }
-  };
-
   getQuizListByEmail = async (user) => {
     if (user) {
       let url = `${process.env.REACT_APP_SERVER}/quiz/email?email=${user.email}`;
