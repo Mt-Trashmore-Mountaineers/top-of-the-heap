@@ -46,20 +46,26 @@ class Question extends React.Component {
         this.props.updateQuestionsState(this.state);
     };
 
-    
+    deleteQuestion = () => {
+        this.props.deleteQuestion(this.props.index);
+    }
+
+    deleteIncorrect = (event) => {
+        let incorrect = this.state.incorrect
+        incorrect.splice(event.target.attributes.index, 1)
+        this.setState({incorrect: incorrect});
+    }
 
     render() {
-        if (this.state.incorrect.length === 0) {
-            this.addIncorrect();
-        };
         let incorrectResponses = this.state.incorrect.map((val, index) => {
             return (
-                <Row fluid="md">
-                    <Form.Group key={index}>
+                <Row key={Math.random()} fluid="md">
+                    <Form.Group>
                         <Col>
                             <Form.Label>
                                 Incorrect
                             </Form.Label>
+                            {this.state.incorrect.length > 1 && <button index={index} className='danger' onClick={this.deleteIncorrect}>Remove Response</button>}
                         </Col>
                         <Col>
                             <Form.Control type="text" onChange={event => this.handleIncorrectChange(event, index)} defaultValue={val} />
@@ -76,6 +82,7 @@ class Question extends React.Component {
                             <Form.Label>
                                 Question
                             </Form.Label>
+                            {this.props.length > 1 && <button className='danger' onClick={this.deleteQuestion}>Delete Question</button>}
                         </Col>
                         {
                             this.state.question === '' ?

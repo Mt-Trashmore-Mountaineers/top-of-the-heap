@@ -23,6 +23,10 @@ class CreateQuiz extends React.Component {
         event.preventDefault();
     }
 
+    componentDidMount = () => {
+        this.addQuestion();
+    }
+
     updateQuestionsState = (question) => {
         let questions = this.state.questions;
         questions[parseInt(question.index)] = question;
@@ -31,11 +35,15 @@ class CreateQuiz extends React.Component {
         });
     }
 
+    deleteQuestion = (index) => {
+        let questions = this.state.questions;
+        questions.splice(index, 1);
+        this.setState({ questions: questions })
+    }
 
     addQuestion = () => {
         let questions = this.state.questions;
         questions.push({
-            index: "0",
             question: '',
             correct: '',
             incorrect: [''],
@@ -48,10 +56,9 @@ class CreateQuiz extends React.Component {
 
     addTriviaQuestion = async () => {
         let questions = this.state.questions;
-        let data = await axios.get("https://opentdb.com/api.php?amount=10&type=multiple");
+        let data = await axios.get("https://opentdb.com/api.php?amount=1&type=multiple");
         let question = await data.data.results[0];
         questions.push({
-            index: "0",
             question: question.question,
             correct: question.correct_answer,
             incorrect: question.incorrect_answers,
@@ -101,9 +108,6 @@ class CreateQuiz extends React.Component {
     }
 
     render() {
-        if (this.state.questions.length === 0) {
-            this.addQuestion();
-        }
         return (
             <>
                 <Form onSubmit={this.prevent}>
@@ -120,14 +124,15 @@ class CreateQuiz extends React.Component {
                     </Form.Group>
                     {this.state.questions.map((val, index) => {
                         return (
-                            <Card>
+                            <Card key={Math.random()}>
                                 <Question
-                                    key={index}
                                     index={index}
                                     question={val.question}
                                     correct={val.correct}
                                     incorrect={val.incorrect}
                                     updateQuestionsState={this.updateQuestionsState}
+                                    deleteQuestion={this.deleteQuestion}
+                                    length={this.state.questions.length}
                                 />
                             </Card>
                         )
