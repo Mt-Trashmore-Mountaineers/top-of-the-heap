@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { ListGroup } from "react-bootstrap";
 import QuizSummary from "./QuizSummary";
-import ViewQuiz from "./ViewQuiz";
+//import ViewQuiz from "./ViewQuiz";
 
 class QuizList extends React.Component {
   constructor(props) {
@@ -16,7 +16,8 @@ class QuizList extends React.Component {
     }
     this.state = {
       quizzes: list,
-      showModal: false
+      showModal: false,
+      quizIndex: 0
     }
   }
 
@@ -27,15 +28,6 @@ class QuizList extends React.Component {
     })
   }
 
-  
-  getQuizListByEmail = async (user) => {
-    if (this.state.userQuizList.length === 0 || user.email !== this.state.currentUserEmail) {
-      let url = `${process.env.REACT_APP_SERVER}/quiz/email?email=${user.email}`;
-      let quizList = await axios(url);
-      this.setState({ userQuizList: quizList.data,
-      currentUserEmail: user.email })
-    }
-  }
 
   /* getQuizzes = async () => {
     try {
@@ -73,6 +65,7 @@ class QuizList extends React.Component {
   }
 
   render() {
+
     return (
       <section>
         <h2>User's Quizzes</h2>
@@ -88,12 +81,12 @@ class QuizList extends React.Component {
               />)
           }
         </ListGroup>
-        <ViewQuiz
+        {/* <ViewQuiz
           quiz={this.state.quizzes[this.state.quizIndex]}
           deleteQuiz={this.deleteQuiz}
           showModal={this.state.showModal}
           toggleModal={this.toggleModal}
-        />
+        /> */}
       </section>
     )
   }
