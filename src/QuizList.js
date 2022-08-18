@@ -1,4 +1,3 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import React from 'react';
 import axios from 'axios';
 import { ListGroup } from "react-bootstrap";
@@ -8,64 +7,15 @@ import ViewQuiz from "./ViewQuiz";
 class QuizList extends React.Component {
   constructor(props) {
     super(props);
+    let list = [];
+    if (this.props.quizList) {
+      list = this.props.quizList.map((val, index) => {
+        val.index = index;
+        return val;
+      })
+    }
     this.state = {
-      quizzes: [{
-        title: 'Test',
-        plays: 420,
-        questions: [{
-          "category": "History",
-          "type": "multiple",
-          "difficulty": "medium",
-          "question": "The seed drill was invented by which British inventor?",
-          "correct_answer": "Jethro Tull",
-          "incorrect_answers": [
-            "Charles Babbage",
-            "Isaac Newton",
-            "J.J Thomson"
-          ]
-        },
-        {
-          "category": "History",
-          "type": "multiple",
-          "difficulty": "medium",
-          "question": "All of the following are names of the Seven Warring States EXCEPT:",
-          "correct_answer": "Zhai (翟)",
-          "incorrect_answers": [
-            "Zhao (趙)",
-            "Qin (秦)",
-            "Qi (齊)"
-          ]
-        }]
-      },
-      {
-        title: '2Test',
-        plays: 420,
-        questions: [{
-          "category": "History",
-          "type": "multiple",
-          "difficulty": "medium",
-          "question": "2The seed drill was invented by which British inventor?",
-          "correct_answer": "Jethro Tull",
-          "incorrect_answers": [
-            "Charles Babbage",
-            "Isaac Newton",
-            "J.J Thomson"
-          ]
-        },
-        {
-          "category": "History",
-          "type": "multiple",
-          "difficulty": "medium",
-          "question": "2All of the following are names of the Seven Warring States EXCEPT:",
-          "correct_answer": "Zhai (翟)",
-          "incorrect_answers": [
-            "Zhao (趙)",
-            "Qin (秦)",
-            "Qi (齊)"
-          ]
-        }]
-      }],
-      quizIndex: 0,
+      quizzes: list,
       showModal: false
     }
   }
@@ -77,7 +27,17 @@ class QuizList extends React.Component {
     })
   }
 
-  getQuizzes = async () => {
+  
+  getQuizListByEmail = async (user) => {
+    if (this.state.userQuizList.length === 0 || user.email !== this.state.currentUserEmail) {
+      let url = `${process.env.REACT_APP_SERVER}/quiz/email?email=${user.email}`;
+      let quizList = await axios(url);
+      this.setState({ userQuizList: quizList.data,
+      currentUserEmail: user.email })
+    }
+  }
+
+  /* getQuizzes = async () => {
     try {
       const user = useAuth0();
       const config = {
@@ -91,7 +51,8 @@ class QuizList extends React.Component {
     } catch (error) {
       console.log('Error', error);
     }
-  }
+  } */
+
   deleteQuiz = async (ID) => {
     try {
       this.toggleModal();
