@@ -27,7 +27,7 @@ https://trello.com/b/PRIB97xY/top-of-the-heap
 
 ## Data Flow
 
-A new player joins us on the about us page. They use a user's email to find the quiz they want from the list of quizzes the email's owner created. The player can now take the selected quiz. The player decides to make a quiz of their own. The quiz is successfully created, and the now host leaves the page. The host can return later and search for their quiz by id. The host notices a typo, and edits the quiz. The host decides that the quiz they created isn't one they want to keep so they delete it. Now without a quiz they decide to create a new quiz using generated trivia questions, and finally store that on our database.
+A new player joins us on the about us page. They use a user's email to find the quiz they want from the list of quizzes the email's owner created. The player can now take the selected quiz. The player decides to make a quiz of their own. The quiz is successfully created, and the now host leaves the page. The host can return later and search for their quiz by id. The host notices a typo, and edits the quiz. The host decides that the quiz they created isn't one they want to keep, so they delete it. Now without a quiz they decide to create a new quiz using generated trivia questions, and finally store that on our database.
 
 ## Non-functional
 
