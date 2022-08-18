@@ -1,5 +1,6 @@
 import React from 'react';
-import { Card, ListGroup } from 'react-bootstrap';
+import './css/App.css';
+import { ListGroup } from 'react-bootstrap';
 
 class PlaySlide extends React.Component {
   constructor(props) {
@@ -45,8 +46,8 @@ class PlaySlide extends React.Component {
 
   render() {
     return (
-      <Card>
-        <Card.Title>{this.props.question.question}</Card.Title>
+      <div className="quiz-card">
+        <h3>{this.props.question.question}</h3>
         <ListGroup>
           {this.state.shuffledAnswers.map((answer, index) => {
             return (
@@ -64,7 +65,7 @@ class PlaySlide extends React.Component {
             )
           })}
         </ListGroup>
-      </Card>
+      </div>
     )
   }
 }
