@@ -21,7 +21,7 @@ class App extends React.Component {
             <Link to={"/create"} className="primary">Create</Link>
             <Link to={"/user"} className="primary">Browse</Link>
             <Link to={"/play"} className="primary">Play</Link>
-            <Link to={"/about"} className="primary">About</Link>
+            <Link to={"/"} className="primary">About</Link>
             {
               // Log in/out button
               isAuthenticated ?
@@ -34,7 +34,7 @@ class App extends React.Component {
           </div>
         </nav>
         <Routes>
-          <Route path="about" element={<About />} ></Route>
+          <Route path="/" element={<About />} ></Route>
           <Route path="create" element={<CreateQuiz quiz={''} questions={[]} email={user ? user.email : ''} title='' />} ></Route>
           <Route path="play" element={<PlayQuiz />} ></Route>
           <Route path="user" element={<QuizList />} ></Route>
