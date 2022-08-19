@@ -16,7 +16,8 @@ class CreateQuiz extends React.Component {
             title: title,
             questions: this.props.questions,
             showModal: false,
-            displayQuizId: ''
+            displayQuizId: '',
+            isUpdate: this.props.isUpdate
         };
     }
 

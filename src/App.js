@@ -16,7 +16,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       isProfileOpen: false,
-      userQuizList: []
+      userQuizList: [],
+      currentUserEmail: "",
     }
   }
 
@@ -34,10 +35,11 @@ class App extends React.Component {
   };
 
   getQuizListByEmail = async (user) => {
-    if (user) {
+    if (this.state.userQuizList.length === 0 || user.email !== this.state.currentUserEmail) {
       let url = `${process.env.REACT_APP_SERVER}/quiz/email?email=${user.email}`;
-      let quizList = await (await axios(url)).data;
-      this.setState({ userQuizList: quizList })
+      let quizList = await axios(url);
+      this.setState({ userQuizList: quizList.data,
+      currentUserEmail: user.email })
     }
   }
 
@@ -62,7 +64,6 @@ class App extends React.Component {
           <div className="button-container">
             <Link to={"/create"} className="primary">Create</Link>
             <Link to={"/user"} className="primary">Browse</Link>
-            <Link to={"/play"} className="primary">Play</Link>
             <Link to={"/"} className="primary">About</Link>
           </div>
           {
@@ -81,8 +82,8 @@ class App extends React.Component {
         </nav>
         <Routes>
           <Route path="" element={<About />} ></Route>
-          <Route path="create" element={<CreateQuiz quiz={''} questions={[]} email={user ? user.email : ''} title='' />} ></Route>
-          <Route path="play" element={<PlayQuiz />} ></Route>
+          <Route path="create" element={<CreateQuiz quiz={''} questions={[]} email={user ? user.email : ''} title='' isUpdate={false}/>} ></Route>
+          <Route path="play/:id" element={<PlayQuiz />} ></Route>
           <Route path="user" element={<QuizList quizList={this.state.userQuizList} />} ></Route>
         </Routes>
       </Router>
