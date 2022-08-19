@@ -8,7 +8,7 @@
 }
 
 .navbar {
-    width: 100vw;
+    width: 100%;
     background-color: var(--blue);
     color: white;
     padding: 10px;
@@ -30,6 +30,11 @@
 .button-container {
     display: flex;
     flex-direction: row;
+}
+
+.main {
+    max-width: 960px;
+    margin: auto;
 }
 
 .card {
@@ -144,7 +149,7 @@ a.primary.grey:active {
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 }
 
 .quiz-card {
@@ -154,4 +159,10 @@ a.primary.grey:active {
     width: auto;
     margin: 20px;
     border-radius: 5px;
+    text-align: center;
 }
+
+.progress {
+    margin: 15px 0 0;
+  }
+  

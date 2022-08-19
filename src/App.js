@@ -59,11 +59,11 @@ class App extends React.Component {
     return (
       <Router className="App">
         <nav className="navbar">
-          <h2>Quiz App</h2>
+          <h2>Top of the Heap</h2>
           <input className="searchbar"></input>
           <div className="button-container">
-            <Link to={"/create"} className="primary">Create</Link>
-            <Link to={"/user"} className="primary">Browse</Link>
+            {user && <Link to={"/create"} className="primary">Create</Link>}
+            {user && <Link to={"/user"} className="primary">Browse</Link>}
             <Link to={"/"} className="primary">About</Link>
           </div>
           {
@@ -80,12 +80,14 @@ class App extends React.Component {
             <UserStats handleProfileOpen={this.handleProfileOpen} user={user} points={0} />
           }
         </nav>
-        <Routes>
-          <Route path="" element={<About />} ></Route>
-          <Route path="create" element={<CreateQuiz quiz={''} questions={[]} email={user ? user.email : ''} title='' isUpdate={false}/>} ></Route>
-          <Route path="play/:id" element={<PlayQuiz />} ></Route>
-          <Route path="user" element={<QuizList quizList={this.state.userQuizList} />} ></Route>
-        </Routes>
+        <div className='main'>
+          <Routes>
+            <Route path="" element={<About />} ></Route>
+            <Route path="create" element={<CreateQuiz quiz={''} questions={[]} email={user ? user.email : ''} title='' isUpdate={false} />} ></Route>
+            <Route path="play/:id" element={<PlayQuiz />} ></Route>
+            <Route path="user" element={<QuizList quizList={this.state.userQuizList} isLoading={this.state.isLoading} />} ></Route>
+          </Routes>
+        </div>
       </Router>
     )
   }
