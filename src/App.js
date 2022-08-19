@@ -74,7 +74,7 @@ class App extends React.Component {
               }}>Log out</button> :
               <button className="primary" onClick={loginWithRedirect}>Login</button>
           }
-          <img onClick={this.handleProfileOpen} id="profile-picture" alt="profile" src={user ? user.picture : `https://avatars.dicebear.com/api/bottts/${Math.round(Math.random() * 1000)}.svg`} />
+          <img onClick={this.handleProfileOpen} id="profile-picture" alt="profile" src={user ? user.picture : `https://avatars.dicebear.com/api/bottts/${1234}.svg`} />
           {
             (this.state.isProfileOpen && user) &&
             <UserStats handleProfileOpen={this.handleProfileOpen} user={user} points={0} />
