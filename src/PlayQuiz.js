@@ -2,63 +2,17 @@ import React from 'react';
 import { Button, Card, Carousel, ListGroup, ListGroupItem, ProgressBar } from 'react-bootstrap';
 import PlaySlide from './PlaySlide';
 import QuizSummary from './QuizSummary';
+import { useParams } from "react-router-dom";
+import axios from 'axios';
+
+function withParams(Component) {
+  return props => <Component {...props} params={useParams()} />;
+}
 
 class PlayQuiz extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      quiz: {
-        title: 'Test',
-        plays: 420,
-        questions: [{
-          "category": "General Knowledge",
-          "type": "multiple",
-          "difficulty": "medium",
-          "question": "What name represents the letter &quot;M&quot; in the NATO phonetic alphabet?",
-          "correct_answer": "Mike",
-          "incorrect_answers": [
-            "Matthew",
-            "Mark",
-            "Max"
-          ]
-        },
-        {
-          "category": "History",
-          "type": "multiple",
-          "difficulty": "medium",
-          "question": "The seed drill was invented by which British inventor?",
-          "correct_answer": "Jethro Tull",
-          "incorrect_answers": [
-            "Charles Babbage",
-            "Isaac Newton",
-            "J.J Thomson"
-          ]
-        },
-        {
-          "category": "History",
-          "type": "multiple",
-          "difficulty": "medium",
-          "question": "All of the following are names of the Seven Warring States EXCEPT:",
-          "correct_answer": "Zhai (翟)",
-          "incorrect_answers": [
-            "Zhao (趙)",
-            "Qin (秦)",
-            "Qi (齊)"
-          ]
-        },
-        {
-          "category": "General Knowledge",
-          "type": "multiple",
-          "difficulty": "easy",
-          "question": "What machine element is located in the center of fidget spinners?",
-          "correct_answer": "Bearings",
-          "incorrect_answers": [
-            "Axles",
-            "Gears",
-            "Belts"
-          ]
-        }]
-      },
       currentQuestion: 0,
       score: {
         total: 0,
@@ -84,11 +38,23 @@ class PlayQuiz extends React.Component {
         'Art': 0,
         'Celebrities': 0,
         'Animals': 0
-      }
+      },
+      isLoading: true
     }
   }
 
   poke = () => console.log('Quit poking me');
+
+  componentDidMount() {
+    let { id } = this.props.params;
+    this.getQuizById(id);
+  }
+
+  getQuizById = async (id) => {
+    let url = `${process.env.REACT_APP_SERVER}/quiz/id?id=${id}`;
+    let quiz = await axios(url);
+    this.setState({quiz: quiz.data, isLoading: false});
+  }
 
   updateScore = (difficulty, category) => {
     let newScore = this.state.score;
@@ -101,8 +67,9 @@ class PlayQuiz extends React.Component {
   nextSlide = () => this.setState({ currentQuestion: this.state.currentQuestion + 1 });
 
   render() {
-    return (
-      <>
+    return (this.state.isLoading ?
+      <p>Loading...</p>
+      : <>
         <ProgressBar now={100 * (this.state.currentQuestion) / (this.state.quiz.questions.length + 1)} />
         {this.state.currentQuestion < this.state.quiz.questions.length + 1 &&
           <>
@@ -142,4 +109,4 @@ class PlayQuiz extends React.Component {
   }
 }
 
-export default PlayQuiz;
+export default withParams(PlayQuiz);

@@ -27,33 +27,11 @@ class QuizList extends React.Component {
     })
   }
 
-
-  /* getQuizzes = async () => {
-    try {
-      const user = useAuth0();
-      const config = {
-        method: 'get',
-        baseURL: process.env.REACT_APP_SERVER,
-        url: '/user',
-        id: user.email
-      }
-      let userData = await axios(config);
-      this.setState({ quizzes: userData.data.quizzes })
-    } catch (error) {
-      console.log('Error', error);
-    }
-  } */
-
   deleteQuiz = async (ID) => {
     try {
       this.toggleModal();
-      const config = {
-        method: 'delete',
-        baseURL: process.env.REACT_APP_SERVER,
-        url: '/quiz',
-        id: ID
-      }
-      await axios(config);
+      const url = `${process.env.REACT_APP_SERVER}/quiz/${ID}`
+      await axios.delete(url);
       let updatedArray = this.state.quizzes.filter(currentQuiz => currentQuiz._id !== ID);
       this.setState({
         quizzes: updatedArray

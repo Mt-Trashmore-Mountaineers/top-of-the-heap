@@ -64,7 +64,6 @@ class App extends React.Component {
           <div className="button-container">
             <Link to={"/create"} className="primary">Create</Link>
             <Link to={"/user"} className="primary">Browse</Link>
-            <Link to={"/play"} className="primary">Play</Link>
             <Link to={"/"} className="primary">About</Link>
           </div>
           {
@@ -84,7 +83,7 @@ class App extends React.Component {
         <Routes>
           <Route path="" element={<About />} ></Route>
           <Route path="create" element={<CreateQuiz quiz={''} questions={[]} email={user ? user.email : ''} title='' isUpdate={false}/>} ></Route>
-          <Route path="play" element={<PlayQuiz />} ></Route>
+          <Route path="play/:id" element={<PlayQuiz />} ></Route>
           <Route path="user" element={<QuizList quizList={this.state.userQuizList} />} ></Route>
         </Routes>
       </Router>
