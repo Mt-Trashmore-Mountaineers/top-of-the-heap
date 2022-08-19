@@ -174,3 +174,10 @@ a.primary.grey:active {
 ::-webkit-scrollbar {
     display: none;
 }
+
+.bio-image {
+    margin: 9px;
+    width: 100px;
+    float: left;
+
+}
