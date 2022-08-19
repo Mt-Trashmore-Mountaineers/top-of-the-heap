@@ -13,11 +13,13 @@ class About extends React.Component {
                 </p>
                 <h1>About the developers</h1>
                 <h2>Jordan Lindo</h2>
-                <p>I’m a software developer with experience on both large and small development teams building projects with different scopes and timelines. I obtained an Associates degree in software development from Kirkwood Community College, along with certificates in Java and .Net Programming. I rose as far as effort could take me in my position as an auditor. As a supervisor I led small teams and acted as the point of contact for clients. When my scrum team asked me to take over I became the leader of our scrum meetings. I facilitated interaction between scrum teams with a goal of efficient communication and effective results. When I encounter a complex problem I take time to think through a path that will reach the necessary conclusion.</p>
+                <p><img src={require('./images/jordanLindoPFP.jpg')}alt='Profile for Jordan Lindo'></img>Jordan is a software developer with experience on both large and small development teams building projects with different scopes and timelines. he obtained an Associates degree in software development from Kirkwood Community College, along with certificates in Java and .Net Programming. He rose as far as effort could take him in his position as an auditor. As a supervisor he led small teams and acted as the point of contact for clients. When his scrum team asked him to take over he became the leader of their scrum meetings. He facilitated interaction between scrum teams with a goal of efficient communication and effective results. When he encounter a complex problem he takes time to think through a path that will reach the necessary conclusion.</p>
+
                 <h2>Daniel Frey</h2>
-                <p>Daniel graduated from Iowa State University in 2013 with a degree in materials engineering and a minor in music. He has worked a wide variety of jobs, from retail sales to warehouse work to church ministry. He is now pursuing a career in software development as a student at Delta V.</p>
+                <p><img src={require('./images/daniel-small.jpg')} alt='Daniel Frey'/>Daniel graduated from Iowa State University in 2013 with a degree in materials engineering and a minor in music. He has worked a wide variety of jobs, from retail sales to warehouse work to church ministry. He is now pursuing a career in software development as a student at Delta V.</p>
+                
                 <h2>Varun Pradeep</h2>
-                <p>Currently learning to copy paste things from StackOverflow</p>
+                <p><img src={require('./images/Varun.png')} alt="Varun Pradeep"/>Varun is currently learning to copy and paste things from StackOverflow, watch YouTube videos, and talk to a rubber duck</p>
             </div>
         )
     }
