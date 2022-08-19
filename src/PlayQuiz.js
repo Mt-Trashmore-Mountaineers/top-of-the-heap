@@ -14,7 +14,7 @@ class PlayQuiz extends React.Component {
           "category": "General Knowledge",
           "type": "multiple",
           "difficulty": "medium",
-          "question": "What name represents the letter &quot;M&quot; in the NATO phonetic alphabet?",
+          "question": "What name represents the letter \"M\"; in the NATO phonetic alphabet?",
           "correct_answer": "Mike",
           "incorrect_answers": [
             "Matthew",
