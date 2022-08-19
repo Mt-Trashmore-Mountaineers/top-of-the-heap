@@ -12,7 +12,7 @@ class ViewQuiz extends React.Component {
     return (
       <Modal show={this.props.showModal} onHide={this.props.toggleModal} >
         <Modal.Header closeButton>
-          <Modal.Title>{this.props.quiz.title}</Modal.Title>
+          <Modal.Title>{this.props.quiz.title || ""}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {this.props.quiz.questions.map((question, index) => <ViewQuestion question={question} key={index} />)}
