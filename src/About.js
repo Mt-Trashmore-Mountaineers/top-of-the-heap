@@ -18,7 +18,7 @@ class About extends React.Component {
                 <p>Daniel graduated from Iowa State University in 2013 with a degree in materials engineering and a minor in music. He has worked a wide variety of jobs, from retail sales to warehouse work to church ministry. He is now pursuing a career in software development as a student at Delta V.</p>
                 <img src={require('./images/Varun.png')} alt="Varun Pradeep" />
                 <h2>Varun Pradeep</h2>
-                <p>Currently learning to copy and paste things from StackOverflow, watch YouTube videos, and talk to a rubber duck</p>
+                <p>Varun is currently learning to copy and paste things from StackOverflow, watch YouTube videos, and talk to a rubber duck</p>
             </div>
         )
     }
