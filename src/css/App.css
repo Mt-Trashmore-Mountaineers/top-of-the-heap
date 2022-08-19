@@ -80,6 +80,10 @@ a.primary.grey:active {
     cursor: pointer;
 }
 
+.main-container {
+    margin: 50px;
+}
+
 .profile-stats {
     position: absolute;
     right: 10px;
@@ -153,6 +157,7 @@ a.primary.grey:active {
 }
 
 .quiz-card {
+    cursor: pointer;
     padding: 10px;
     border: medium none;
     box-shadow: rgb(34, 34, 34) 0px 0px 6px;
@@ -164,5 +169,8 @@ a.primary.grey:active {
 
 .progress {
     margin: 15px 0 0;
-  }
-  
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
