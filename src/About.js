@@ -19,7 +19,7 @@ class About extends React.Component {
                 <p><img src={require('./images/daniel-small.jpg')} alt='Daniel Frey' className='bio-image'/>Daniel graduated from Iowa State University in 2013 with a degree in materials engineering and a minor in music. He has worked a wide variety of jobs, from retail sales to warehouse work to church ministry. He frequently finds himself chasing rabbit trails of knowledge, learning a little bit about a wide variety of topics. One such excursion down the rabbit trail of logic and design led him to computer programming, where he is now pursuing a career in software development as a student at Delta V.</p>
                 
                 <h2>Varun Pradeep</h2>
-                <p><img src={require('./images/Varun.png')} alt="Varun Pradeep" className='bio-image'/>Varun is currently learning to copy and paste things from StackOverflow, watch YouTube videos, and talk to a rubber duck</p>
+                <p><img src={require('./images/Varun.png')} alt="Varun Pradeep" className='bio-image'/>Varun is currently learning to copy and paste things from StackOverflow, watch YouTube videos, and talk to rubber ducks. Additionally, he is a high schooler in 10th grade.</p>
             </div>
         )
     }

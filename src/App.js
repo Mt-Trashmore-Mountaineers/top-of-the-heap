@@ -18,28 +18,32 @@ class App extends React.Component {
       isProfileOpen: false,
       userQuizList: [],
       currentUserEmail: "",
-    }
+      userScore: 0
+    };
   }
 
-  handleProfileOpen = () => {
+  handleProfileOpen = async (user) => {
     if (this.state.isProfileOpen) {
       this.setState({
         isProfileOpen: false
       });
     } else {
+      let res = await axios.get(`${process.env.REACT_APP_SERVER}/user?email=${user.email}`);
       this.setState({
+        userScore: res.data[0].totalScore,
         isProfileOpen: true
       });
     }
-    // TODO - add profile stats
   };
 
   getQuizListByEmail = async (user) => {
     if (this.state.userQuizList.length === 0 || user.email !== this.state.currentUserEmail) {
       let url = `${process.env.REACT_APP_SERVER}/quiz/email?email=${user.email}`;
       let quizList = await axios(url);
-      this.setState({ userQuizList: quizList.data,
-      currentUserEmail: user.email })
+      this.setState({
+        userQuizList: quizList.data,
+        currentUserEmail: user.email
+      })
     }
   }
 
@@ -74,10 +78,10 @@ class App extends React.Component {
               }}>Log out</button> :
               <button className="primary" onClick={loginWithRedirect}>Login</button>
           }
-          <img onClick={this.handleProfileOpen} id="profile-picture" alt="profile" src={user ? user.picture : `https://avatars.dicebear.com/api/bottts/${1234}.svg`} />
+          <img onClick={() => this.handleProfileOpen(user)} id="profile-picture" alt="profile" src={user ? user.picture : `https://avatars.dicebear.com/api/bottts/${1234}.svg`} />
           {
             (this.state.isProfileOpen && user) &&
-            <UserStats handleProfileOpen={this.handleProfileOpen} user={user} points={0} />
+            <UserStats handleProfileOpen={this.handleProfileOpen} user={user} points={this.state.userScore} />
           }
         </nav>
         <div className='main'>
