@@ -57,8 +57,8 @@ class PlaySlide extends React.Component {
                 onClick={this.scoreQuestion}
                 style={{
                   backgroundColor:
-                    this.state.correct === index ? 'green'
-                      : this.state.incorrect === index ? 'red'
+                    this.state.correct === index ? 'lightgreen'
+                      : this.state.incorrect === index ? 'salmon'
                         : ''
                 }}
               >{answer}</ListGroup.Item>
